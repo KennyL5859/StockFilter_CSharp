@@ -39,7 +39,7 @@ namespace Stock_YahooFinance
             this.lstTickers.ItemHeight = 25;
             this.lstTickers.Location = new System.Drawing.Point(36, 37);
             this.lstTickers.Name = "lstTickers";
-            this.lstTickers.Size = new System.Drawing.Size(384, 429);
+            this.lstTickers.Size = new System.Drawing.Size(362, 429);
             this.lstTickers.TabIndex = 0;
             // 
             // frmMain
