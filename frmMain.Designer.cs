@@ -37,16 +37,16 @@ namespace Stock_YahooFinance
             this.lstTickers.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lstTickers.FormattingEnabled = true;
             this.lstTickers.ItemHeight = 25;
-            this.lstTickers.Location = new System.Drawing.Point(36, 37);
+            this.lstTickers.Location = new System.Drawing.Point(24, 30);
             this.lstTickers.Name = "lstTickers";
-            this.lstTickers.Size = new System.Drawing.Size(362, 429);
+            this.lstTickers.Size = new System.Drawing.Size(218, 429);
             this.lstTickers.TabIndex = 0;
             // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(902, 523);
+            this.ClientSize = new System.Drawing.Size(605, 482);
             this.Controls.Add(this.lstTickers);
             this.Name = "frmMain";
             this.Text = "Main Form";

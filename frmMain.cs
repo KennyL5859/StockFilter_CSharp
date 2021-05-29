@@ -8,11 +8,16 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using YahooFinanceApi;
+using System.IO;
 
 namespace Stock_YahooFinance
 {
     public partial class frmMain : Form
     {
+        // path to the ticker.txt file
+        static string filePath = AppDomain.CurrentDomain.BaseDirectory;
+        static string TICKERPATH = Path.GetFullPath(Path.Combine(filePath, @"..\..\Required\Ticker.txt"));
+
         public frmMain()
         {
             InitializeComponent();
@@ -20,7 +25,28 @@ namespace Stock_YahooFinance
 
         private void frmMain_Load(object sender, EventArgs e)
         {
-            GetPrice();
+
+            ReadTickers();            
+        }
+
+        private void ReadTickers()
+        {
+            if (!File.Exists(TICKERPATH))
+            {
+                MessageBox.Show("File not found");
+                return;
+            }
+
+            var fileStream = new FileStream(TICKERPATH, FileMode.Open, FileAccess.Read);
+
+            using (var streamReader = new StreamReader(fileStream, Encoding.UTF8))
+            {
+                string line;
+                while ((line = streamReader.ReadLine()) != null)
+                {
+                    lstTickers.Items.Add(line);
+                }
+            }
         }
 
         private static async void GetPrice()
@@ -37,8 +63,7 @@ namespace Stock_YahooFinance
             var data1 = historyData[0];
 
 
-            MessageBox.Show("hi");
-
+            MessageBox.Show(TICKERPATH);
         }
     }
 }
