@@ -17,6 +17,7 @@ namespace Stock_YahooFinance
         // path to the ticker.txt file
         static string filePath = AppDomain.CurrentDomain.BaseDirectory;
         static string TICKERPATH = Path.GetFullPath(Path.Combine(filePath, @"..\..\Required\Ticker.txt"));
+        List<string> tickerList = new List<string>();
 
         public frmMain()
         {
@@ -25,29 +26,54 @@ namespace Stock_YahooFinance
 
         private void frmMain_Load(object sender, EventArgs e)
         {
-
             ReadTickers();            
         }
 
+        // method that reads all tickers from text file into list view and ticker list
         private void ReadTickers()
         {
+            // prompt user if file is not found
             if (!File.Exists(TICKERPATH))
             {
                 MessageBox.Show("File not found");
                 return;
             }
 
+            // open the file and read each line (ticker) into List<string> tickerList
             var fileStream = new FileStream(TICKERPATH, FileMode.Open, FileAccess.Read);
 
             using (var streamReader = new StreamReader(fileStream, Encoding.UTF8))
             {
                 string line;
                 while ((line = streamReader.ReadLine()) != null)
-                {
-                    lstTickers.Items.Add(line);
+                {             
+                    tickerList.Add(line);
                 }
             }
+
+            // set datasource of listbox to tickerList
+            lstTickers.DataSource = tickerList;
         }
+
+        private void tosbtnDelete_Click(object sender, EventArgs e)
+        {
+            if (lstTickers.SelectedIndex == -1)
+            {
+                MessageBox.Show("You must select a ticker(s) to delete");
+                return;
+            }
+
+            // deletes the selected ticker(s)
+            foreach (var index in lstTickers.SelectedIndices)            
+                tickerList.Remove((string)lstTickers.Items[(int)index]);
+
+            // unlink and then link the datasource to listbox
+            lstTickers.DataSource = null;
+            lstTickers.DataSource = tickerList;
+        }
+
+
+
 
         private static async void GetPrice()
         {
@@ -65,5 +91,7 @@ namespace Stock_YahooFinance
 
             MessageBox.Show(TICKERPATH);
         }
+
+
     }
 }

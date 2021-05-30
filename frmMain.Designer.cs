@@ -29,7 +29,17 @@ namespace Stock_YahooFinance
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMain));
             this.lstTickers = new System.Windows.Forms.ListBox();
+            this.statusStp = new System.Windows.Forms.StatusStrip();
+            this.stslblStauts = new System.Windows.Forms.ToolStripStatusLabel();
+            this.tolStp = new System.Windows.Forms.ToolStrip();
+            this.tosbtnAdd = new System.Windows.Forms.ToolStripButton();
+            this.tosbtnDelete = new System.Windows.Forms.ToolStripButton();
+            this.tosbtnEdit = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.statusStp.SuspendLayout();
+            this.tolStp.SuspendLayout();
             this.SuspendLayout();
             // 
             // lstTickers
@@ -37,27 +47,105 @@ namespace Stock_YahooFinance
             this.lstTickers.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lstTickers.FormattingEnabled = true;
             this.lstTickers.ItemHeight = 25;
-            this.lstTickers.Location = new System.Drawing.Point(24, 30);
+            this.lstTickers.Location = new System.Drawing.Point(21, 47);
             this.lstTickers.Name = "lstTickers";
-            this.lstTickers.Size = new System.Drawing.Size(218, 429);
+            this.lstTickers.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
+            this.lstTickers.Size = new System.Drawing.Size(191, 429);
             this.lstTickers.TabIndex = 0;
+            // 
+            // statusStp
+            // 
+            this.statusStp.ImageScalingSize = new System.Drawing.Size(24, 24);
+            this.statusStp.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.stslblStauts});
+            this.statusStp.Location = new System.Drawing.Point(0, 500);
+            this.statusStp.Name = "statusStp";
+            this.statusStp.Size = new System.Drawing.Size(579, 22);
+            this.statusStp.TabIndex = 1;
+            this.statusStp.Text = "statusStrip1";
+            // 
+            // stslblStauts
+            // 
+            this.stslblStauts.Name = "stslblStauts";
+            this.stslblStauts.Size = new System.Drawing.Size(0, 15);
+            // 
+            // tolStp
+            // 
+            this.tolStp.ImageScalingSize = new System.Drawing.Size(24, 24);
+            this.tolStp.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tosbtnAdd,
+            this.tosbtnDelete,
+            this.tosbtnEdit,
+            this.toolStripSeparator1});
+            this.tolStp.Location = new System.Drawing.Point(0, 0);
+            this.tolStp.Name = "tolStp";
+            this.tolStp.Size = new System.Drawing.Size(579, 33);
+            this.tolStp.TabIndex = 2;
+            this.tolStp.Text = "toolStrip1";
+            // 
+            // tosbtnAdd
+            // 
+            this.tosbtnAdd.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.tosbtnAdd.Image = ((System.Drawing.Image)(resources.GetObject("tosbtnAdd.Image")));
+            this.tosbtnAdd.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tosbtnAdd.Name = "tosbtnAdd";
+            this.tosbtnAdd.Size = new System.Drawing.Size(34, 28);
+            this.tosbtnAdd.Text = "Add Ticker";
+            // 
+            // tosbtnDelete
+            // 
+            this.tosbtnDelete.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.tosbtnDelete.Image = ((System.Drawing.Image)(resources.GetObject("tosbtnDelete.Image")));
+            this.tosbtnDelete.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tosbtnDelete.Name = "tosbtnDelete";
+            this.tosbtnDelete.Size = new System.Drawing.Size(34, 28);
+            this.tosbtnDelete.Text = "Delete Ticker";
+            this.tosbtnDelete.Click += new System.EventHandler(this.tosbtnDelete_Click);
+            // 
+            // tosbtnEdit
+            // 
+            this.tosbtnEdit.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.tosbtnEdit.Image = ((System.Drawing.Image)(resources.GetObject("tosbtnEdit.Image")));
+            this.tosbtnEdit.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tosbtnEdit.Name = "tosbtnEdit";
+            this.tosbtnEdit.Size = new System.Drawing.Size(34, 28);
+            this.tosbtnEdit.Text = "Edit Ticker";
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 33);
             // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(605, 482);
+            this.ClientSize = new System.Drawing.Size(579, 522);
+            this.Controls.Add(this.tolStp);
+            this.Controls.Add(this.statusStp);
             this.Controls.Add(this.lstTickers);
             this.Name = "frmMain";
             this.Text = "Main Form";
             this.Load += new System.EventHandler(this.frmMain_Load);
+            this.statusStp.ResumeLayout(false);
+            this.statusStp.PerformLayout();
+            this.tolStp.ResumeLayout(false);
+            this.tolStp.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
         #endregion
 
         private System.Windows.Forms.ListBox lstTickers;
+        private System.Windows.Forms.StatusStrip statusStp;
+        private System.Windows.Forms.ToolStripStatusLabel stslblStauts;
+        private System.Windows.Forms.ToolStrip tolStp;
+        private System.Windows.Forms.ToolStripButton tosbtnAdd;
+        private System.Windows.Forms.ToolStripButton tosbtnDelete;
+        private System.Windows.Forms.ToolStripButton tosbtnEdit;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
     }
 }
 
