@@ -54,6 +54,18 @@ namespace Stock_YahooFinance
             UpdateTickerListBox();
         }
 
+        private void tosbtnAdd_Click(object sender, EventArgs e)
+        {       
+
+            frmAddEdit addForm = new frmAddEdit(tickerList, true, 0);
+            addForm.ShowDialog();
+            UpdateTickerListBox();
+            WriteToTextFile();
+
+            lstTickers.SelectedIndex = lstTickers.Items.Count - 1;
+            ChangeStatusLabel(stslblStauts, "Listbox have been updated");
+        }
+
         private void tosbtnDelete_Click(object sender, EventArgs e)
         {
             if (lstTickers.SelectedIndex == -1)
@@ -75,6 +87,7 @@ namespace Stock_YahooFinance
             UpdateTickerListBox();
             WriteToTextFile();
 
+            // make the message and display it for 5 seconds
             string tickers = removeList.Count <= 4 ? string.Join(" ", removeList) : 
                 string.Join(" ", removeList.ToArray(), 0, 4) + "...";
 

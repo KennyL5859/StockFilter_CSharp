@@ -60,16 +60,16 @@ namespace Stock_YahooFinance
             this.statusStp.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.stslblStauts,
             this.toslblStatus});
-            this.statusStp.Location = new System.Drawing.Point(0, 490);
+            this.statusStp.Location = new System.Drawing.Point(0, 496);
             this.statusStp.Name = "statusStp";
-            this.statusStp.Size = new System.Drawing.Size(529, 28);
+            this.statusStp.Size = new System.Drawing.Size(529, 22);
             this.statusStp.TabIndex = 1;
             this.statusStp.Text = "statusStrip1";
             // 
             // stslblStauts
             // 
             this.stslblStauts.Name = "stslblStauts";
-            this.stslblStauts.Size = new System.Drawing.Size(0, 21);
+            this.stslblStauts.Size = new System.Drawing.Size(0, 15);
             // 
             // tolStp
             // 
@@ -81,7 +81,7 @@ namespace Stock_YahooFinance
             this.toolStripSeparator1});
             this.tolStp.Location = new System.Drawing.Point(0, 0);
             this.tolStp.Name = "tolStp";
-            this.tolStp.Size = new System.Drawing.Size(529, 38);
+            this.tolStp.Size = new System.Drawing.Size(529, 33);
             this.tolStp.TabIndex = 2;
             this.tolStp.Text = "toolStrip1";
             // 
@@ -91,8 +91,9 @@ namespace Stock_YahooFinance
             this.tosbtnAdd.Image = ((System.Drawing.Image)(resources.GetObject("tosbtnAdd.Image")));
             this.tosbtnAdd.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tosbtnAdd.Name = "tosbtnAdd";
-            this.tosbtnAdd.Size = new System.Drawing.Size(34, 33);
+            this.tosbtnAdd.Size = new System.Drawing.Size(34, 28);
             this.tosbtnAdd.Text = "Add Ticker";
+            this.tosbtnAdd.Click += new System.EventHandler(this.tosbtnAdd_Click);
             // 
             // tosbtnDelete
             // 
@@ -100,7 +101,7 @@ namespace Stock_YahooFinance
             this.tosbtnDelete.Image = ((System.Drawing.Image)(resources.GetObject("tosbtnDelete.Image")));
             this.tosbtnDelete.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tosbtnDelete.Name = "tosbtnDelete";
-            this.tosbtnDelete.Size = new System.Drawing.Size(34, 33);
+            this.tosbtnDelete.Size = new System.Drawing.Size(34, 28);
             this.tosbtnDelete.Text = "Delete Ticker";
             this.tosbtnDelete.Click += new System.EventHandler(this.tosbtnDelete_Click);
             // 
@@ -110,18 +111,18 @@ namespace Stock_YahooFinance
             this.tosbtnEdit.Image = ((System.Drawing.Image)(resources.GetObject("tosbtnEdit.Image")));
             this.tosbtnEdit.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tosbtnEdit.Name = "tosbtnEdit";
-            this.tosbtnEdit.Size = new System.Drawing.Size(34, 33);
+            this.tosbtnEdit.Size = new System.Drawing.Size(34, 28);
             this.tosbtnEdit.Text = "Edit Ticker";
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 38);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 33);
             // 
             // toslblStatus
             // 
             this.toslblStatus.Name = "toslblStatus";
-            this.toslblStatus.Size = new System.Drawing.Size(0, 21);
+            this.toslblStatus.Size = new System.Drawing.Size(0, 15);
             // 
             // frmMain
             // 
@@ -132,7 +133,7 @@ namespace Stock_YahooFinance
             this.Controls.Add(this.statusStp);
             this.Controls.Add(this.lstTickers);
             this.Name = "frmMain";
-            this.Text = "s";
+            this.Text = "Main Form";
             this.Load += new System.EventHandler(this.frmMain_Load);
             this.statusStp.ResumeLayout(false);
             this.statusStp.PerformLayout();
