@@ -40,6 +40,7 @@ namespace Stock_YahooFinance
             {
                 this.Text = "Edit Ticker";
                 btnAdd.Text = "Save";
+                txtTicker.Text = tickerLists[selIndex];
             }
         }
 
@@ -50,15 +51,22 @@ namespace Stock_YahooFinance
             if (!CheckTickerRegex(txtTicker, "Ticker symbol must be 1 to 4 letters eg. TSLA, ba"))
                 return;
 
-            if (!CheckForDuplicate(tickerLists, txtTicker))
-                return;
+            if (isAdd)
+            {
+                if (!CheckForDuplicate(tickerLists, txtTicker))
+                    return;
 
-            string ticker = txtTicker.Text.ToUpper();
-            tickerLists.Add(ticker);
-            txtTicker.Clear();
-
-            string msg = ticker + " have been added to the list.";
-            ChangeStatusLabel(stslblStatus, msg);
+                string ticker = txtTicker.Text.ToUpper();
+                tickerLists.Add(ticker);
+                txtTicker.Clear();
+                string msg = ticker + " have been added to the list.";
+                ChangeStatusLabel(stslblStatus, msg);
+            }
+            else
+            {
+                if (!CheckForEditingDuplicate(tickerLists, txtTicker, selIndex))
+                    return;
+            }
 
         }
 
@@ -82,8 +90,27 @@ namespace Stock_YahooFinance
             timer.Start();
         }
 
+        private bool CheckForEditingDuplicate(List<string> tickList, TextBox txt, int index)
+        {
+            // this is a duplication check when user is in edit mode
+            List<string> tempList = new List<string>(tickerLists);
+            tempList.RemoveAt(index);
+
+            if (tempList.Contains(txt.Text.ToUpper()))
+            {
+                MessageBox.Show(txt.Text + " is a duplicate ticker");
+                txt.BackColor = Color.LightYellow;
+                return false;
+            }
+            else
+            {
+                return true;
+            }         
+        }
+
         private bool CheckForDuplicate(List<string> tickList, TextBox txt)
         {
+            // check for duplicate ticker in ticker lists
             if (tickList.Contains(txt.Text.ToUpper()))
             {
                 MessageBox.Show(txt.Text + " is a duplicate ticker");

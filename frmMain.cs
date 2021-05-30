@@ -97,6 +97,21 @@ namespace Stock_YahooFinance
             ChangeStatusLabel(toslblStatus, message);
         }
 
+        private void tosbtnEdit_Click(object sender, EventArgs e)
+        {
+            if (lstTickers.SelectedIndices.Count != 1)
+            {
+                MessageBox.Show("You must select only one ticker to edit");
+                return;
+            }
+
+            int sIndex = lstTickers.SelectedIndex;
+            frmAddEdit newEditForm = new frmAddEdit(tickerList, false, sIndex);
+            newEditForm.ShowDialog();
+
+
+        }
+
         private void UpdateTickerListBox()
         {
             // unlink and then link the datasource to listbox
@@ -150,7 +165,5 @@ namespace Stock_YahooFinance
 
             MessageBox.Show(TICKERPATH);
         }
-
-
     }
 }

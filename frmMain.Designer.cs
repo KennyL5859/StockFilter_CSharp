@@ -113,6 +113,7 @@ namespace Stock_YahooFinance
             this.tosbtnEdit.Name = "tosbtnEdit";
             this.tosbtnEdit.Size = new System.Drawing.Size(34, 28);
             this.tosbtnEdit.Text = "Edit Ticker";
+            this.tosbtnEdit.Click += new System.EventHandler(this.tosbtnEdit_Click);
             // 
             // toolStripSeparator1
             // 
