@@ -51,8 +51,7 @@ namespace Stock_YahooFinance
                 }
             }
 
-            // set datasource of listbox to tickerList
-            lstTickers.DataSource = tickerList;
+            UpdateTickerListBox();
         }
 
         private void tosbtnDelete_Click(object sender, EventArgs e)
@@ -63,16 +62,63 @@ namespace Stock_YahooFinance
                 return;
             }
 
-            // deletes the selected ticker(s)
-            foreach (var index in lstTickers.SelectedIndices)            
-                tickerList.Remove((string)lstTickers.Items[(int)index]);
+            List<string> removeList = new List<string>();
 
+            // deletes the selected ticker(s), add the deleted ones onto a
+            // temperary remove list
+            foreach (var index in lstTickers.SelectedIndices)
+            {
+                tickerList.Remove((string)lstTickers.Items[(int)index]);
+                removeList.Add((string)lstTickers.Items[(int)index]);
+            }                
+
+            UpdateTickerListBox();
+            WriteToTextFile();
+
+            string tickers = removeList.Count <= 4 ? string.Join(" ", removeList) : 
+                string.Join(" ", removeList.ToArray(), 0, 4) + "...";
+
+            string singularOrPlural = removeList.Count == 1 ? "ticker" : "tickers";
+            string message = tickers + " " + singularOrPlural + " have been removed from list.";
+
+            ChangeStatusLabel(toslblStatus, message);
+        }
+
+        private void UpdateTickerListBox()
+        {
             // unlink and then link the datasource to listbox
             lstTickers.DataSource = null;
             lstTickers.DataSource = tickerList;
         }
 
+        private void WriteToTextFile()
+        {
+            // writes whats in tickerList into text file
+            File.WriteAllText(TICKERPATH, string.Empty);
 
+            using (StreamWriter wr = new StreamWriter(TICKERPATH))
+            {
+                for (int i = 0; i < tickerList.Count; i++)
+                {
+                    wr.WriteLine(tickerList[i]);
+                }
+            }
+        }
+
+        private void ChangeStatusLabel(ToolStripLabel status, string msg)
+        {
+            // displays the message, then erase it after 5 seconds
+            status.Text = msg;
+
+            var timer = new Timer();
+            timer.Interval = 5000;
+            timer.Tick += (s, e) =>
+            {
+                status.Text = "";
+                timer.Stop();
+            };
+            timer.Start();
+        }
 
 
         private static async void GetPrice()
