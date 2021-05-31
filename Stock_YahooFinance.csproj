@@ -81,6 +81,7 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Stock.cs" />
     <EmbeddedResource Include="frm50MA.resx">
       <DependentUpon>frm50MA.cs</DependentUpon>
     </EmbeddedResource>

@@ -26,7 +26,8 @@ namespace Stock_YahooFinance
 
         private void frmMain_Load(object sender, EventArgs e)
         {
-            ReadTickers();            
+            ReadTickers();
+            GetPrice();
         }
 
         // method that reads all tickers from text file into list view and ticker list
@@ -160,19 +161,25 @@ namespace Stock_YahooFinance
         }
 
 
-        private static async void GetPrice()
+        private async void GetPrice()
         {
-            var securities = await Yahoo.Symbols("AAPL", "GOOG").Fields(Field.Symbol, Field.RegularMarketPrice, 
-                        Field.FiftyTwoWeekHigh, Field.ShortName, Field.FiftyDayAverage).QueryAsync();
-            var aapl = securities["AAPL"];
-            var price = aapl[Field.FiftyDayAverage];
+            //string ticker = "AAPL";
+            //var stock = await Yahoo.Symbols(ticker).Fields(Field.FiftyDayAverage).QueryAsync();
+            //var stockTic = stock[ticker];
+            //double x = Convert.ToDouble(stockTic[Field.FiftyDayAverage]);
+
+            Stock sts = new Stock("AAPL");
+            await sts.GetStockData();
 
 
-            var historyData = await Yahoo.GetHistoricalAsync("AAPL", new DateTime(2021, 5, 1),
-                new DateTime(2021, 5, 28), Period.Daily);
+            double regualr = sts.RegularMarketPrice;
 
-            var data1 = historyData[0];
+           
 
+            string newTicker = sts.ticker;
+
+            MessageBox.Show(regualr.ToString());
+            
 
             MessageBox.Show(TICKERPATH);
         }
