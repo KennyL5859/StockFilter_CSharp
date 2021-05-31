@@ -1,7 +1,5 @@
 AAPL
 HD
-KO
-PFE
 WYNN
 MGM
 NAT
@@ -10,3 +8,5 @@ SHOP
 F
 GS
 AMZN
+GE
+AAL

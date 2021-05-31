@@ -57,7 +57,7 @@ namespace Stock_YahooFinance
         private void tosbtnAdd_Click(object sender, EventArgs e)
         {       
 
-            frmAddEdit addForm = new frmAddEdit(tickerList, true, 0);
+            frmAddEdit addForm = new frmAddEdit(tickerList, true, 0, lstTickers);
             addForm.ShowDialog();
             UpdateTickerListBox();
             WriteToTextFile();
@@ -106,10 +106,16 @@ namespace Stock_YahooFinance
             }
 
             int sIndex = lstTickers.SelectedIndex;
-            frmAddEdit newEditForm = new frmAddEdit(tickerList, false, sIndex);
+            string oldTicker = tickerList[sIndex];
+            frmAddEdit newEditForm = new frmAddEdit(tickerList, false, sIndex, lstTickers);
             newEditForm.ShowDialog();
 
+            UpdateTickerListBox();
+            WriteToTextFile();
 
+            string newTicker = tickerList[sIndex];
+            string msg = oldTicker + " has been updated to " + newTicker;
+            ChangeStatusLabel(stslblStauts, msg);
         }
 
         private void UpdateTickerListBox()
@@ -148,6 +154,11 @@ namespace Stock_YahooFinance
             timer.Start();
         }
 
+        private void btn50Day_Click(object sender, EventArgs e)
+        {
+
+        }
+
 
         private static async void GetPrice()
         {
@@ -165,5 +176,7 @@ namespace Stock_YahooFinance
 
             MessageBox.Show(TICKERPATH);
         }
+
+
     }
 }

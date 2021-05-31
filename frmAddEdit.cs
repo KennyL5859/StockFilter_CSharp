@@ -14,6 +14,7 @@ namespace Stock_YahooFinance
     public partial class frmAddEdit : Form
     {
         List<string> tickerLists = new List<string>();
+        ListBox lstTickers = new ListBox();
         bool isAdd;
         int selIndex;
         public frmAddEdit()
@@ -21,12 +22,13 @@ namespace Stock_YahooFinance
             InitializeComponent();
         }        
 
-        public frmAddEdit(List<string> tList, bool add, int index)
+        public frmAddEdit(List<string> tList, bool add, int index, ListBox lst)
         {
             InitializeComponent();
             this.tickerLists = tList;
             this.isAdd = add;
             this.selIndex = index;
+            this.lstTickers = lst;
         }
 
         private void frmAddEdit_Load(object sender, EventArgs e)
@@ -53,6 +55,7 @@ namespace Stock_YahooFinance
 
             if (isAdd)
             {
+                // add ticker to the tickerlist
                 if (!CheckForDuplicate(tickerLists, txtTicker))
                     return;
 
@@ -64,9 +67,21 @@ namespace Stock_YahooFinance
             }
             else
             {
+                // update the ticker from old to new and close the form
                 if (!CheckForEditingDuplicate(tickerLists, txtTicker, selIndex))
                     return;
+
+                string oldTicker = tickerLists[selIndex];
+                string newTicker = txtTicker.Text.ToUpper();
+                tickerLists[selIndex] = newTicker;
+                txtTicker.Clear();
+                this.Close();
             }
+
+            // update the grid list as user adds/edits tickers
+            lstTickers.DataSource = null;
+            lstTickers.DataSource = tickerLists;
+
 
         }
 

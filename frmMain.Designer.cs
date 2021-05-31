@@ -33,12 +33,13 @@ namespace Stock_YahooFinance
             this.lstTickers = new System.Windows.Forms.ListBox();
             this.statusStp = new System.Windows.Forms.StatusStrip();
             this.stslblStauts = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toslblStatus = new System.Windows.Forms.ToolStripStatusLabel();
             this.tolStp = new System.Windows.Forms.ToolStrip();
             this.tosbtnAdd = new System.Windows.Forms.ToolStripButton();
             this.tosbtnDelete = new System.Windows.Forms.ToolStripButton();
             this.tosbtnEdit = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.toslblStatus = new System.Windows.Forms.ToolStripStatusLabel();
+            this.btn50Day = new System.Windows.Forms.Button();
             this.statusStp.SuspendLayout();
             this.tolStp.SuspendLayout();
             this.SuspendLayout();
@@ -70,6 +71,11 @@ namespace Stock_YahooFinance
             // 
             this.stslblStauts.Name = "stslblStauts";
             this.stslblStauts.Size = new System.Drawing.Size(0, 15);
+            // 
+            // toslblStatus
+            // 
+            this.toslblStatus.Name = "toslblStatus";
+            this.toslblStatus.Size = new System.Drawing.Size(0, 15);
             // 
             // tolStp
             // 
@@ -120,16 +126,24 @@ namespace Stock_YahooFinance
             this.toolStripSeparator1.Name = "toolStripSeparator1";
             this.toolStripSeparator1.Size = new System.Drawing.Size(6, 33);
             // 
-            // toslblStatus
+            // btn50Day
             // 
-            this.toslblStatus.Name = "toslblStatus";
-            this.toslblStatus.Size = new System.Drawing.Size(0, 15);
+            this.btn50Day.BackColor = System.Drawing.Color.Ivory;
+            this.btn50Day.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn50Day.Location = new System.Drawing.Point(181, 53);
+            this.btn50Day.Name = "btn50Day";
+            this.btn50Day.Size = new System.Drawing.Size(104, 42);
+            this.btn50Day.TabIndex = 3;
+            this.btn50Day.Text = "50 MA";
+            this.btn50Day.UseVisualStyleBackColor = false;
+            this.btn50Day.Click += new System.EventHandler(this.btn50Day_Click);
             // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(529, 518);
+            this.Controls.Add(this.btn50Day);
             this.Controls.Add(this.tolStp);
             this.Controls.Add(this.statusStp);
             this.Controls.Add(this.lstTickers);
@@ -156,6 +170,7 @@ namespace Stock_YahooFinance
         private System.Windows.Forms.ToolStripButton tosbtnEdit;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripStatusLabel toslblStatus;
+        private System.Windows.Forms.Button btn50Day;
     }
 }
 
