@@ -169,12 +169,13 @@ namespace Stock_YahooFinance
             //double x = Convert.ToDouble(stockTic[Field.FiftyDayAverage]);
 
             Stock sts = new Stock("AAPL");
-            await sts.GetStockData();
 
+            DateTime start = new DateTime(2021, 5, 1);
+            DateTime end = new DateTime(2021, 5, 25);
 
-            double test = sts.Avg10DayVol;
+            await sts.GetHistoricalPrices(start, end);
 
-           
+            var test = sts.PriceHistory;          
 
   
 
