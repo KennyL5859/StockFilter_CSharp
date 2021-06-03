@@ -27,7 +27,7 @@ namespace Stock_YahooFinance
         private void frmMain_Load(object sender, EventArgs e)
         {
             ReadTickers();
-            GetPrice();
+            //GetPrice();
         }
 
         // method that reads all tickers from text file into list view and ticker list
@@ -57,7 +57,7 @@ namespace Stock_YahooFinance
 
         private void tosbtnAdd_Click(object sender, EventArgs e)
         {       
-
+            // opens up the add form when user clicks add button
             frmAddEdit addForm = new frmAddEdit(tickerList, true, 0, lstTickers);
             addForm.ShowDialog();
             UpdateTickerListBox();
@@ -106,18 +106,30 @@ namespace Stock_YahooFinance
                 return;
             }
 
+            // opens up the edit form and let user edits the stock ticker
             int sIndex = lstTickers.SelectedIndex;
             string oldTicker = tickerList[sIndex];
             frmAddEdit newEditForm = new frmAddEdit(tickerList, false, sIndex, lstTickers);
             newEditForm.ShowDialog();
 
+            // update Ticker Listbox and write to the text file
             UpdateTickerListBox();
             WriteToTextFile();
 
+            // display which ticker was updated to user
             string newTicker = tickerList[sIndex];
             string msg = oldTicker + " has been updated to " + newTicker;
             ChangeStatusLabel(stslblStauts, msg);
         }
+
+        private void btn50Day_Click(object sender, EventArgs e)
+        {
+            frm50MA new50MA = new frm50MA(tickerList);
+            new50MA.ShowDialog();
+
+
+        }
+
 
         private void UpdateTickerListBox()
         {
@@ -155,11 +167,6 @@ namespace Stock_YahooFinance
             timer.Start();
         }
 
-        private void btn50Day_Click(object sender, EventArgs e)
-        {
-
-        }
-
 
         private async void GetPrice()
         {
@@ -168,21 +175,24 @@ namespace Stock_YahooFinance
             //var stockTic = stock[ticker];
             //double x = Convert.ToDouble(stockTic[Field.FiftyDayAverage]);
 
-            Stock sts = new Stock("AAPL");
+            Stock sts = new Stock("QQQ");
 
-            DateTime start = new DateTime(2021, 5, 1);
-            DateTime end = new DateTime(2021, 5, 25);
+            //DateTime start = new DateTime(2021, 5, 1);
+            //DateTime end = new DateTime(2021, 5, 25);
 
-            await sts.GetHistoricalPrices(start, end);
+            //await sts.GetHistoricalPrices(start, end);
 
-            var test = sts.PriceHistory;          
+            await sts.GetStockData();
+
+            var test = sts.RegularMarketPrice;
+
+            var test3 = sts.MA50;
+            var test2 = sts.MA50_Change;
 
   
 
-            MessageBox.Show(test.ToString());
-            
+            MessageBox.Show(test.ToString());            
 
-            MessageBox.Show(TICKERPATH);
         }
 
 

@@ -12,9 +12,75 @@ namespace Stock_YahooFinance
 {
     public partial class frm50MA : Form
     {
+        List<string> tickerList = new List<string>();
         public frm50MA()
         {
             InitializeComponent();
+        }
+
+        public frm50MA(List<string> ticList)
+        {
+            InitializeComponent();
+            this.tickerList = ticList;
+        }
+
+        private void frm50MA_Load(object sender, EventArgs e)
+        {
+            ddlRange.Items.Add("1%");
+            ddlRange.Items.Add("2%");
+            ddlRange.Items.Add("3%");
+            ddlRange.Items.Add("4%");
+            ddlRange.Items.Add("5%");
+
+        }
+
+
+        private async void tosbtnScan_Click(object sender, EventArgs e)
+        {     
+
+            if (ddlRange.SelectedIndex == -1)
+            {
+                MessageBox.Show("You must select a range");
+                return;
+            }
+
+            double percentRange = ddlRange.SelectedIndex == 0 ? 0.01 :
+                ddlRange.SelectedIndex == 1 ? 0.02 : ddlRange.SelectedIndex == 2 ?
+                0.03 : ddlRange.SelectedIndex == 3 ? 0.04 : 0.05;
+
+            await FillListBox(percentRange);
+
+            MessageBox.Show(percentRange.ToString());
+        }
+
+        private async Task FillListBox(double percentRange)
+        {
+
+            lstResults.Items.Clear();
+            lstResults.Items.Add("Ticker".PadRight(10) + "% Change");
+            lstResults.Items.Add("------".PadRight(10) + "--------");
+
+            for (int i = 0; i < tickerList.Count; i++)
+            {
+                string ticker = tickerList[i];
+                Stock stks = new Stock(ticker);
+                await stks.GetStockData();
+
+                double MA50Percent = stks.MA50_Change_Percent;
+                double MA200Percent = stks.MA200_Change_Percent;
+
+                if (rad50MA.Checked)
+                {
+                    if (percentRange == 0.01)
+                    {
+                        if (Math.Abs(MA50Percent) <= 0.015)
+                        {
+                            lstResults.Items.Add(stks.ticker.PadRight(10) +
+                                Math.Round(stks.MA50_Change_Percent * 100, 2).ToString() + "%");
+                        }
+                    }
+                }
+            }
         }
     }
 }
