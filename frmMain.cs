@@ -172,13 +172,13 @@ namespace Stock_YahooFinance
             await sts.GetStockData();
 
 
-            double regualr = sts.RegularMarketPrice;
+            double test = sts.Avg10DayVol;
 
            
 
-            string newTicker = sts.ticker;
+  
 
-            MessageBox.Show(regualr.ToString());
+            MessageBox.Show(test.ToString());
             
 
             MessageBox.Show(TICKERPATH);
