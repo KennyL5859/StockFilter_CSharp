@@ -50,12 +50,14 @@ namespace Stock_YahooFinance
 
             await FillListBox(percentRange);
 
-            MessageBox.Show(percentRange.ToString());
+            int matches = lstResults.Items.Count - 2;
+            string msg = matches + " stocks fit the criteria";
+            ChangeStatusLabel(stslblStatus, msg);
+
         }
 
         private async Task FillListBox(double percentRange)
         {
-
             lstResults.Items.Clear();
             lstResults.Items.Add("Ticker".PadRight(10) + "% Change");
             lstResults.Items.Add("------".PadRight(10) + "--------");
@@ -79,8 +81,98 @@ namespace Stock_YahooFinance
                                 Math.Round(stks.MA50_Change_Percent * 100, 2).ToString() + "%");
                         }
                     }
+                    else if (percentRange == 0.02)
+                    {
+                        if (Math.Abs(MA50Percent) > 0.015 && Math.Abs(MA50Percent) <= 0.025)
+                        {
+                            lstResults.Items.Add(stks.ticker.PadRight(10) +
+                                Math.Round(stks.MA50_Change_Percent * 100, 2).ToString() + "%");
+                        }
+                    }
+                    else if (percentRange == 0.03)
+                    {
+                        if (Math.Abs(MA50Percent) > 0.025 && Math.Abs(MA50Percent) <= 0.035)
+                        {
+                            lstResults.Items.Add(stks.ticker.PadRight(10) +
+                                Math.Round(stks.MA50_Change_Percent * 100, 2).ToString() + "%");
+                        }
+                    }
+                    else if (percentRange == 0.04)
+                    {
+                        if (Math.Abs(MA50Percent) > 0.035 && Math.Abs(MA50Percent) <= 0.045)
+                        {
+                            lstResults.Items.Add(stks.ticker.PadRight(10) +
+                                Math.Round(stks.MA50_Change_Percent * 100, 2).ToString() + "%");
+                        }
+                    }
+                    else if (percentRange == 0.05)
+                    {
+                        if (Math.Abs(MA50Percent) > 0.045 && Math.Abs(MA50Percent) <= 0.055)
+                        {
+                            lstResults.Items.Add(stks.ticker.PadRight(10) +
+                                Math.Round(stks.MA50_Change_Percent * 100, 2).ToString() + "%");
+                        }
+                    }
+                }
+                else if (rad200MA.Checked)
+                {
+                    if (percentRange == 0.01)
+                    {
+                        if (Math.Abs(MA200Percent) <= 0.015)
+                        {
+                            lstResults.Items.Add(stks.ticker.PadRight(10) +
+                                Math.Round(stks.MA200_Change_Percent * 100, 2).ToString() + "%");
+                        }
+                    }
+                    else if (percentRange == 0.02)
+                    {
+                        if (Math.Abs(MA200Percent) > 0.015 && Math.Abs(MA200Percent) <= 0.025)
+                        {
+                            lstResults.Items.Add(stks.ticker.PadRight(10) +
+                                Math.Round(stks.MA200_Change_Percent * 100, 2).ToString() + "%");
+                        }
+                    }
+                    else if (percentRange == 0.03)
+                    {
+                        if (Math.Abs(MA200Percent) > 0.025 && Math.Abs(MA200Percent) <= 0.035)
+                        {
+                            lstResults.Items.Add(stks.ticker.PadRight(10) +
+                                Math.Round(stks.MA200_Change_Percent * 100, 2).ToString() + "%");
+                        }
+                    }
+                    else if (percentRange == 0.04)
+                    {
+                        if (Math.Abs(MA200Percent) > 0.035 && Math.Abs(MA200Percent) <= 0.045)
+                        {
+                            lstResults.Items.Add(stks.ticker.PadRight(10) +
+                                Math.Round(stks.MA200_Change_Percent * 100, 2).ToString() + "%");
+                        }
+                    }
+                    else if (percentRange == 0.05)
+                    {
+                        if (Math.Abs(MA200Percent) > 0.045 && Math.Abs(MA200Percent) <= 0.055)
+                        {
+                            lstResults.Items.Add(stks.ticker.PadRight(10) +
+                                Math.Round(stks.MA200_Change_Percent * 100, 2).ToString() + "%");
+                        }
+                    }
                 }
             }
+        }
+
+        private void ChangeStatusLabel(ToolStripLabel status, string msg)
+        {
+            // displays the message, then erase it after 5 seconds
+            status.Text = msg;
+
+            var timer = new Timer();
+            timer.Interval = 5000;
+            timer.Tick += (s, e) =>
+            {
+                status.Text = "";
+                timer.Stop();
+            };
+            timer.Start();
         }
     }
 }

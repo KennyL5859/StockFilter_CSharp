@@ -52,7 +52,7 @@ namespace Stock_YahooFinance
             this.lstTickers.Location = new System.Drawing.Point(12, 53);
             this.lstTickers.Name = "lstTickers";
             this.lstTickers.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
-            this.lstTickers.Size = new System.Drawing.Size(119, 429);
+            this.lstTickers.Size = new System.Drawing.Size(119, 404);
             this.lstTickers.TabIndex = 0;
             // 
             // statusStp
