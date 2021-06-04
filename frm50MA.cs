@@ -53,7 +53,11 @@ namespace Stock_YahooFinance
             int matches = lstResults.Items.Count - 2;
             string msg = matches + " stocks fit the criteria";
             ChangeStatusLabel(stslblStatus, msg);
+        }
 
+        private void tosbtnClear_Click(object sender, EventArgs e)
+        {
+            lstResults.Items.Clear();
         }
 
         private async Task FillListBox(double percentRange)

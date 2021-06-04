@@ -61,9 +61,9 @@ namespace Stock_YahooFinance
             this.statusStp.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.stslblStauts,
             this.toslblStatus});
-            this.statusStp.Location = new System.Drawing.Point(0, 496);
+            this.statusStp.Location = new System.Drawing.Point(0, 486);
             this.statusStp.Name = "statusStp";
-            this.statusStp.Size = new System.Drawing.Size(529, 22);
+            this.statusStp.Size = new System.Drawing.Size(521, 22);
             this.statusStp.TabIndex = 1;
             this.statusStp.Text = "statusStrip1";
             // 
@@ -87,7 +87,7 @@ namespace Stock_YahooFinance
             this.toolStripSeparator1});
             this.tolStp.Location = new System.Drawing.Point(0, 0);
             this.tolStp.Name = "tolStp";
-            this.tolStp.Size = new System.Drawing.Size(529, 33);
+            this.tolStp.Size = new System.Drawing.Size(521, 33);
             this.tolStp.TabIndex = 2;
             this.tolStp.Text = "toolStrip1";
             // 
@@ -128,13 +128,13 @@ namespace Stock_YahooFinance
             // 
             // btn50Day
             // 
-            this.btn50Day.BackColor = System.Drawing.Color.Ivory;
+            this.btn50Day.BackColor = System.Drawing.Color.DarkCyan;
             this.btn50Day.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn50Day.Location = new System.Drawing.Point(181, 53);
+            this.btn50Day.Location = new System.Drawing.Point(171, 53);
             this.btn50Day.Name = "btn50Day";
-            this.btn50Day.Size = new System.Drawing.Size(104, 42);
+            this.btn50Day.Size = new System.Drawing.Size(149, 42);
             this.btn50Day.TabIndex = 3;
-            this.btn50Day.Text = "50 MA";
+            this.btn50Day.Text = "50 / 200 MA";
             this.btn50Day.UseVisualStyleBackColor = false;
             this.btn50Day.Click += new System.EventHandler(this.btn50Day_Click);
             // 
@@ -142,7 +142,7 @@ namespace Stock_YahooFinance
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(529, 518);
+            this.ClientSize = new System.Drawing.Size(521, 508);
             this.Controls.Add(this.btn50Day);
             this.Controls.Add(this.tolStp);
             this.Controls.Add(this.statusStp);

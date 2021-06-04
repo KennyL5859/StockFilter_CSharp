@@ -48,7 +48,7 @@ namespace Stock_YahooFinance
             this.ddlRange.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.ddlRange.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ddlRange.FormattingEnabled = true;
-            this.ddlRange.Location = new System.Drawing.Point(235, 67);
+            this.ddlRange.Location = new System.Drawing.Point(235, 71);
             this.ddlRange.Name = "ddlRange";
             this.ddlRange.Size = new System.Drawing.Size(78, 33);
             this.ddlRange.TabIndex = 1;
@@ -61,7 +61,7 @@ namespace Stock_YahooFinance
             this.tosbtnClear});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(345, 38);
+            this.toolStrip1.Size = new System.Drawing.Size(345, 33);
             this.toolStrip1.TabIndex = 2;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -71,7 +71,7 @@ namespace Stock_YahooFinance
             this.tosbtnScan.Image = ((System.Drawing.Image)(resources.GetObject("tosbtnScan.Image")));
             this.tosbtnScan.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tosbtnScan.Name = "tosbtnScan";
-            this.tosbtnScan.Size = new System.Drawing.Size(34, 33);
+            this.tosbtnScan.Size = new System.Drawing.Size(34, 28);
             this.tosbtnScan.Text = "Scan List";
             this.tosbtnScan.Click += new System.EventHandler(this.tosbtnScan_Click);
             // 
@@ -81,8 +81,9 @@ namespace Stock_YahooFinance
             this.tosbtnClear.Image = ((System.Drawing.Image)(resources.GetObject("tosbtnClear.Image")));
             this.tosbtnClear.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tosbtnClear.Name = "tosbtnClear";
-            this.tosbtnClear.Size = new System.Drawing.Size(34, 33);
+            this.tosbtnClear.Size = new System.Drawing.Size(34, 28);
             this.tosbtnClear.Text = "Clear All";
+            this.tosbtnClear.Click += new System.EventHandler(this.tosbtnClear_Click);
             // 
             // statusStrip1
             // 
