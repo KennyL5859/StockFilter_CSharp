@@ -146,7 +146,7 @@ namespace Stock_YahooFinance
             this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.ddlRange);
             this.Name = "frm50MA";
-            this.Text = "50 Day Moving Average";
+            this.Text = "Moving Averages";
             this.Load += new System.EventHandler(this.frm50MA_Load);
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();

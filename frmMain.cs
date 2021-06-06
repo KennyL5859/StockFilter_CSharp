@@ -177,19 +177,16 @@ namespace Stock_YahooFinance
 
             Stock sts = new Stock("QQQ");
 
-            //DateTime start = new DateTime(2021, 5, 1);
-            //DateTime end = new DateTime(2021, 5, 25);
+            DateTime start = new DateTime(2021, 5, 1);
+            DateTime end = new DateTime(2021, 5, 25);
 
-            //await sts.GetHistoricalPrices(start, end);
+            await sts.GetHistoricalPrices(start, end);
 
-            await sts.GetStockData();
+            var test = sts.PriceHistory;
 
-            var test = sts.RegularMarketPrice;
 
-            var test3 = sts.MA50;
-            var test2 = sts.MA50_Change;
 
-  
+
 
             MessageBox.Show(test.ToString());            
 
