@@ -35,9 +35,27 @@ namespace Stock_YahooFinance
             }
         }
 
-        private void tosbtnSearch_Click(object sender, EventArgs e)
+        private async void tosbtnSearch_Click(object sender, EventArgs e)
         {
+            foreach (string ticker in tickerList)
+            {
+                Stock stks = new Stock(ticker);
+                bool qualify = await stks.StockConform(0, 2);
 
+                if (qualify)
+                {
+                    lstResults.Items.Add(stks.ticker);
+                }
+            }
+
+            MessageBox.Show("Done");
+        }
+
+        private void tosbtnClear_Click(object sender, EventArgs e)
+        {
+            string test = "\u2193" + "4 days";
+
+            MessageBox.Show(test);
         }
     }
 }

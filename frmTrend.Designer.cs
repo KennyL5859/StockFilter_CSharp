@@ -32,12 +32,12 @@ namespace Stock_YahooFinance
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmTrend));
             this.lstResults = new System.Windows.Forms.ListBox();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
+            this.tosbtnSearch = new System.Windows.Forms.ToolStripButton();
+            this.tosbtnClear = new System.Windows.Forms.ToolStripButton();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.stslblStatus = new System.Windows.Forms.ToolStripStatusLabel();
             this.picDown = new System.Windows.Forms.PictureBox();
             this.picUp = new System.Windows.Forms.PictureBox();
-            this.tosbtnSearch = new System.Windows.Forms.ToolStripButton();
-            this.tosbtnClear = new System.Windows.Forms.ToolStripButton();
             this.ddlUp = new System.Windows.Forms.ComboBox();
             this.ddlDown = new System.Windows.Forms.ComboBox();
             this.toolStrip1.SuspendLayout();
@@ -48,12 +48,12 @@ namespace Stock_YahooFinance
             // 
             // lstResults
             // 
-            this.lstResults.Font = new System.Drawing.Font("Consolas", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lstResults.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lstResults.FormattingEnabled = true;
-            this.lstResults.ItemHeight = 23;
+            this.lstResults.ItemHeight = 28;
             this.lstResults.Location = new System.Drawing.Point(24, 54);
             this.lstResults.Name = "lstResults";
-            this.lstResults.Size = new System.Drawing.Size(271, 303);
+            this.lstResults.Size = new System.Drawing.Size(282, 312);
             this.lstResults.TabIndex = 0;
             // 
             // toolStrip1
@@ -67,6 +67,26 @@ namespace Stock_YahooFinance
             this.toolStrip1.Size = new System.Drawing.Size(612, 33);
             this.toolStrip1.TabIndex = 1;
             this.toolStrip1.Text = "toolStrip1";
+            // 
+            // tosbtnSearch
+            // 
+            this.tosbtnSearch.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.tosbtnSearch.Image = ((System.Drawing.Image)(resources.GetObject("tosbtnSearch.Image")));
+            this.tosbtnSearch.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tosbtnSearch.Name = "tosbtnSearch";
+            this.tosbtnSearch.Size = new System.Drawing.Size(34, 28);
+            this.tosbtnSearch.Text = "Search";
+            this.tosbtnSearch.Click += new System.EventHandler(this.tosbtnSearch_Click);
+            // 
+            // tosbtnClear
+            // 
+            this.tosbtnClear.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.tosbtnClear.Image = ((System.Drawing.Image)(resources.GetObject("tosbtnClear.Image")));
+            this.tosbtnClear.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tosbtnClear.Name = "tosbtnClear";
+            this.tosbtnClear.Size = new System.Drawing.Size(34, 28);
+            this.tosbtnClear.Text = "Clear";
+            this.tosbtnClear.Click += new System.EventHandler(this.tosbtnClear_Click);
             // 
             // statusStrip1
             // 
@@ -87,7 +107,7 @@ namespace Stock_YahooFinance
             // picDown
             // 
             this.picDown.Image = global::Stock_YahooFinance.Properties.Resources.Down;
-            this.picDown.Location = new System.Drawing.Point(324, 201);
+            this.picDown.Location = new System.Drawing.Point(331, 201);
             this.picDown.Name = "picDown";
             this.picDown.Size = new System.Drawing.Size(51, 53);
             this.picDown.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -97,38 +117,19 @@ namespace Stock_YahooFinance
             // picUp
             // 
             this.picUp.Image = global::Stock_YahooFinance.Properties.Resources.Up;
-            this.picUp.Location = new System.Drawing.Point(324, 123);
+            this.picUp.Location = new System.Drawing.Point(331, 123);
             this.picUp.Name = "picUp";
             this.picUp.Size = new System.Drawing.Size(51, 53);
             this.picUp.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.picUp.TabIndex = 3;
             this.picUp.TabStop = false;
             // 
-            // tosbtnSearch
-            // 
-            this.tosbtnSearch.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.tosbtnSearch.Image = ((System.Drawing.Image)(resources.GetObject("tosbtnSearch.Image")));
-            this.tosbtnSearch.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.tosbtnSearch.Name = "tosbtnSearch";
-            this.tosbtnSearch.Size = new System.Drawing.Size(34, 28);
-            this.tosbtnSearch.Text = "Search";
-            this.tosbtnSearch.Click += new System.EventHandler(this.tosbtnSearch_Click);
-            // 
-            // tosbtnClear
-            // 
-            this.tosbtnClear.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.tosbtnClear.Image = ((System.Drawing.Image)(resources.GetObject("tosbtnClear.Image")));
-            this.tosbtnClear.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.tosbtnClear.Name = "tosbtnClear";
-            this.tosbtnClear.Size = new System.Drawing.Size(34, 28);
-            this.tosbtnClear.Text = "Clear";
-            // 
             // ddlUp
             // 
             this.ddlUp.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.ddlUp.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ddlUp.FormattingEnabled = true;
-            this.ddlUp.Location = new System.Drawing.Point(406, 143);
+            this.ddlUp.Location = new System.Drawing.Point(413, 143);
             this.ddlUp.Name = "ddlUp";
             this.ddlUp.Size = new System.Drawing.Size(77, 33);
             this.ddlUp.TabIndex = 5;
@@ -138,7 +139,7 @@ namespace Stock_YahooFinance
             this.ddlDown.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.ddlDown.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ddlDown.FormattingEnabled = true;
-            this.ddlDown.Location = new System.Drawing.Point(406, 201);
+            this.ddlDown.Location = new System.Drawing.Point(413, 201);
             this.ddlDown.Name = "ddlDown";
             this.ddlDown.Size = new System.Drawing.Size(77, 33);
             this.ddlDown.TabIndex = 6;

@@ -31,25 +31,26 @@ namespace Stock_YahooFinance
             ddlRange.Items.Add("3%");
             ddlRange.Items.Add("4%");
             ddlRange.Items.Add("5%");
-
         }
 
-
         private async void tosbtnScan_Click(object sender, EventArgs e)
-        {     
-
+        {
+            // warn user if there is no range percent selected
             if (ddlRange.SelectedIndex == -1)
             {
                 MessageBox.Show("You must select a range");
                 return;
             }
 
+            // ternary operator to get the user selected percentage
             double percentRange = ddlRange.SelectedIndex == 0 ? 0.01 :
                 ddlRange.SelectedIndex == 1 ? 0.02 : ddlRange.SelectedIndex == 2 ?
                 0.03 : ddlRange.SelectedIndex == 3 ? 0.04 : 0.05;
 
+            // call FillListBox Async method
             await FillListBox(percentRange);
 
+            // display number of matches on status bar
             int matches = lstResults.Items.Count - 2;
             string msg = matches + " stocks fit the criteria";
             ChangeStatusLabel(stslblStatus, msg);
@@ -59,6 +60,7 @@ namespace Stock_YahooFinance
         {
             lstResults.Items.Clear();
         }
+
 
         private async Task FillListBox(double percentRange)
         {

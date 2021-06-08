@@ -35,14 +35,6 @@ namespace Stock_YahooFinance
             DateTime today = DateTime.Now;
             DateTime priorDate = today.AddDays(-15);
             await GetHistoricalPrices(priorDate, today);
-
-            this.PriceHistory[10] = 240.89M;
-            this.PriceHistory[9] = 246.22M;
-            this.PriceHistory[8] = 248.89M;
-            this.PriceHistory[7] = 242.22M;
-            this.PriceHistory[6] = 241.22M;
-            this.PriceHistory[5] = 240.35M;
-
             var history = this.PriceHistory;
             int numRecords = this.PriceHistory.Count;
             
@@ -110,7 +102,7 @@ namespace Stock_YahooFinance
                         upCount++;
                 }
 
-                if (downCount < 2 && upCount < 2)
+                if (downCount < dIndex && upCount < dIndex)
                     return false;
 
 
@@ -125,10 +117,7 @@ namespace Stock_YahooFinance
                 if (downCount != upCount2 || upCount != downCount2)
                     return false;
 
-
-                return true;
-
-                
+                return true;                
             }
 
 
