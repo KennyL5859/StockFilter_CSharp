@@ -149,6 +149,7 @@ namespace Stock_YahooFinance
             this.btnTrend.TabIndex = 4;
             this.btnTrend.Text = "Trend";
             this.btnTrend.UseVisualStyleBackColor = false;
+            this.btnTrend.Click += new System.EventHandler(this.btnTrend_Click);
             // 
             // frmMain
             // 

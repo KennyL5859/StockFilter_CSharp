@@ -12,9 +12,32 @@ namespace Stock_YahooFinance
 {
     public partial class frmTrend : Form
     {
+        List<string> tickerList = new List<string>();
+
         public frmTrend()
         {
             InitializeComponent();
+        }
+
+        public frmTrend(List<string> sList)
+        {
+            InitializeComponent();
+            this.tickerList = sList;
+        }
+
+        private void frmTrend_Load(object sender, EventArgs e)
+        {
+            // populate the drop down lists
+            for (int i = 1; i <= 5; i++)
+            {
+                ddlDown.Items.Add(i);
+                ddlUp.Items.Add(i);
+            }
+        }
+
+        private void tosbtnSearch_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

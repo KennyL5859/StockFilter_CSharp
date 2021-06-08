@@ -21,7 +21,8 @@ namespace Stock_YahooFinance
         public double MA50_Change_Percent { get; set; }
         public double MA200_Change { get; set; }
         public double MA200_Change_Percent { get; set; }
-        public Dictionary<DateTime, decimal> PriceHistory  { get; set; }
+        public Dictionary<int, decimal> PriceHistory  { get; set; }
+        public Dictionary<DateTime, decimal> PriceHistoryDates { get; set; }
 
 
         public Stock(string ticSymbol)
@@ -29,16 +30,79 @@ namespace Stock_YahooFinance
             this.ticker = ticSymbol;
         }
 
+        public async Task<bool> StockConform(int uIndex, int dIndex)
+        {
+            DateTime today = DateTime.Now;
+            DateTime priorDate = today.AddDays(-15);
+            await GetHistoricalPrices(priorDate, today);
+
+            this.PriceHistory[8] = 248.89M;
+            var test = this.PriceHistory;
+            int numRecords = this.PriceHistory.Count;
+
+            if (uIndex < dIndex)
+            {
+                int firstStart = numRecords - uIndex;
+                int secondStart = firstStart - dIndex;
+
+                for (int i = firstStart; i < numRecords; i++)
+                {
+                    if (test[i] < test[i + 1])
+                    {
+                        continue;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                }
+
+                for (int d = secondStart; d < firstStart; d++)
+                {
+                    if (test[d] > test[d + 1])
+                    {
+                        continue;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                }
+
+
+                return true;
+            }
+            else
+            {
+                
+            }
+
+
+            return false;
+        }
+
         public async Task GetHistoricalPrices(DateTime start, DateTime end)
         {
             // gets the historica dates/prices and insert it into dictionary
             var history = await Yahoo.GetHistoricalAsync(ticker, start, end);
-            this.PriceHistory = new Dictionary<DateTime, decimal>();
+            this.PriceHistory = new Dictionary<int, decimal>();
+
+            int begin = 1;
 
             foreach (var point in history)
             {
-                this.PriceHistory.Add(point.DateTime, point.Close);
+                this.PriceHistory.Add(begin, point.Close);
+                begin++;
             }
+        }
+
+        public async Task GetHistoricalPricesDates(DateTime start, DateTime end)
+        {
+            var history = await Yahoo.GetHistoricalAsync(ticker, start, end);
+            this.PriceHistoryDates = new Dictionary<DateTime, decimal>();
+
+            foreach (var point in history)
+                this.PriceHistoryDates.Add(point.DateTime, point.Close);
         }
 
         public async Task GetStockData()

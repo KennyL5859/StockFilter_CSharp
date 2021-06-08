@@ -27,7 +27,7 @@ namespace Stock_YahooFinance
         private void frmMain_Load(object sender, EventArgs e)
         {
             ReadTickers();
-            //GetPrice();
+            GetPrice();
         }
 
         // method that reads all tickers from text file into list view and ticker list
@@ -126,8 +126,12 @@ namespace Stock_YahooFinance
         {
             frm50MA new50MA = new frm50MA(tickerList);
             new50MA.ShowDialog();
+        }
 
-
+        private void btnTrend_Click(object sender, EventArgs e)
+        {
+            frmTrend trendForm = new frmTrend(tickerList);
+            trendForm.ShowDialog();
         }
 
 
@@ -175,20 +179,21 @@ namespace Stock_YahooFinance
             //var stockTic = stock[ticker];
             //double x = Convert.ToDouble(stockTic[Field.FiftyDayAverage]);
 
-            Stock sts = new Stock("QQQ");
+            Stock sts = new Stock("BA");
 
-            DateTime start = new DateTime(2021, 5, 1);
-            DateTime end = new DateTime(2021, 5, 25);
+            //DateTime start = new DateTime(2021, 5, 20);
+            //DateTime end = new DateTime(2021, 6, 4);
 
-            await sts.GetHistoricalPrices(start, end);
-
-            var test = sts.PriceHistory;
-
+            //await sts.GetHistoricalPrices(start, end);
+         
 
 
+            bool ans = await sts.StockConform(2, 3);
 
 
-            MessageBox.Show(test.ToString());            
+
+
+            MessageBox.Show("test");            
 
         }
 
