@@ -126,7 +126,7 @@ namespace Stock_YahooFinance
 
         public async Task GetHistoricalPrices(DateTime start, DateTime end)
         {
-            // gets the historica dates/prices and insert it into dictionary
+            // gets the historical dates/prices and insert it into dictionary
             var history = await Yahoo.GetHistoricalAsync(ticker, start, end);
             this.PriceHistory = new Dictionary<int, decimal>();
 

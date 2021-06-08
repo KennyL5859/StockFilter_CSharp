@@ -61,7 +61,6 @@ namespace Stock_YahooFinance
             lstResults.Items.Clear();
         }
 
-
         private async Task FillListBox(double percentRange)
         {
             lstResults.Items.Clear();
