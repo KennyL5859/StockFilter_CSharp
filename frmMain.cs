@@ -188,7 +188,7 @@ namespace Stock_YahooFinance
          
 
 
-            bool ans = await sts.StockConform(2, 3);
+            bool ans = await sts.StockConform(2, 2);
 
 
 

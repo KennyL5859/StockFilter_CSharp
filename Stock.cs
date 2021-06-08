@@ -36,10 +36,16 @@ namespace Stock_YahooFinance
             DateTime priorDate = today.AddDays(-15);
             await GetHistoricalPrices(priorDate, today);
 
+            this.PriceHistory[10] = 240.89M;
+            this.PriceHistory[9] = 246.22M;
             this.PriceHistory[8] = 248.89M;
-            var test = this.PriceHistory;
-            int numRecords = this.PriceHistory.Count;
+            this.PriceHistory[7] = 242.22M;
+            this.PriceHistory[6] = 241.22M;
+            this.PriceHistory[5] = 240.35M;
 
+            var history = this.PriceHistory;
+            int numRecords = this.PriceHistory.Count;
+            
             if (uIndex < dIndex)
             {
                 int firstStart = numRecords - uIndex;
@@ -47,33 +53,81 @@ namespace Stock_YahooFinance
 
                 for (int i = firstStart; i < numRecords; i++)
                 {
-                    if (test[i] < test[i + 1])
-                    {
-                        continue;
-                    }
-                    else
-                    {
-                        return false;
-                    }
+                    if (history[i] < history[i + 1])                    
+                        continue;                    
+                    else                    
+                        return false;                    
                 }
 
                 for (int d = secondStart; d < firstStart; d++)
                 {
-                    if (test[d] > test[d + 1])
-                    {
-                        continue;
-                    }
-                    else
-                    {
-                        return false;
-                    }
+                    if (history[d] > history[d + 1])                    
+                        continue;                    
+                    else                    
+                        return false;                    
                 }
-
 
                 return true;
             }
-            else
+            else if (uIndex > dIndex)
             {
+                int firstStart = numRecords - dIndex;
+                int secondStart = firstStart - uIndex;
+
+                for (int i = firstStart; i < numRecords; i++)
+                {
+                    if (history[i] > history[i + 1])
+                        continue;
+                    else
+                        return false;                    
+                }
+
+                for (int i = secondStart; i < firstStart; i++)
+                {
+                    if (history[i] < history[i + 1])
+                        continue;
+                    else
+                        return false;
+                }
+
+                return true;
+            }
+            else if (uIndex == dIndex)
+            {
+                int firstStart = numRecords - dIndex;
+                int secondStart = firstStart - uIndex;
+
+                int upCount = 0;
+                int downCount = 0;
+                int upCount2 = 0;
+                int downCount2 = 0;
+
+                for (int i = firstStart; i < numRecords; i++)
+                {
+                    if (history[i] > history[i + 1])
+                        downCount++;
+                    else
+                        upCount++;
+                }
+
+                if (downCount < 2 && upCount < 2)
+                    return false;
+
+
+                for (int i = secondStart; i < firstStart; i++)
+                {
+                    if (history[i] > history[i + 1])
+                        downCount2++;
+                    else
+                        upCount2++;
+                }
+
+                if (downCount != upCount2 || upCount != downCount2)
+                    return false;
+
+
+                return true;
+
                 
             }
 
