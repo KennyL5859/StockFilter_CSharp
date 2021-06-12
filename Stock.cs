@@ -30,6 +30,21 @@ namespace Stock_YahooFinance
             this.ticker = ticSymbol;
         }
 
+        public async Task<List<string>> GetPriceLabels(int fIndex, int sIndex)
+        {
+            List<string> priceList = new List<string>();
+            await GetHistoricalPrices(DateTime.Today.AddDays(-18), DateTime.Today);
+            int first = this.PriceHistory.Count - fIndex - sIndex - 1;
+            int second = this.PriceHistory.Count - sIndex - 1;
+            decimal price1 = this.PriceHistory.ElementAt(first).Value;
+            decimal price2 = this.PriceHistory.ElementAt(second).Value;
+            string strPrice1 = "$" + Math.Round(price1, 2).ToString();
+            string strPrice2 = "$" + Math.Round(price2, 2).ToString();
+            priceList.Add(strPrice1);
+            priceList.Add(strPrice2);
+            return priceList;
+        }
+
         public async Task<List<string>> GetDateLabels(int fIndex, int sIndex)
         {
             List<string> dateList = new List<string>();
