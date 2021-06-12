@@ -48,10 +48,21 @@ namespace Stock_YahooFinance
             int upIndex = ddlUp.SelectedIndex == -1 ? 0 : ddlUp.SelectedIndex + 1;
             int downIndex = ddlDown.SelectedIndex == -1 ? 0 : ddlDown.SelectedIndex + 1;
 
-            string firstIndex = upIndex > downIndex ? "\u2191" + upIndex : "\u2193" + downIndex;
-            string secondIndex = upIndex > downIndex ? "\u2193" + downIndex : "\u2191" + upIndex;
+            int firstIndex = upIndex > downIndex ? upIndex : downIndex;
+            int secondIndex = upIndex > downIndex ? downIndex : upIndex;            
 
-            lstResults.Items.Add("Tickers".PadRight(13) + firstIndex.PadRight(9) + secondIndex);
+            string strFIndex = upIndex > downIndex ? "\u2191" + upIndex : "\u2193" + downIndex;
+            string strSIndex = upIndex > downIndex ? "\u2193" + downIndex : "\u2191" + upIndex;
+
+            Stock sts = new Stock("SPY");
+
+            var dateLabels = await sts.GetDateLabels(firstIndex, secondIndex);
+
+            string finalLabel1 = strFIndex + " " + dateLabels[0];
+            string finalLabel2 = strSIndex + " " + dateLabels[1];
+
+
+            lstResults.Items.Add("Tickers".PadRight(11) + finalLabel1.PadRight(11) + finalLabel2);
             
 
 
@@ -69,6 +80,7 @@ namespace Stock_YahooFinance
 
             MessageBox.Show("Done");
         }
+
 
         private void tosbtnClear_Click(object sender, EventArgs e)
         {
