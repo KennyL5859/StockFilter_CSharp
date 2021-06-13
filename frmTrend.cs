@@ -28,7 +28,7 @@ namespace Stock_YahooFinance
         private void frmTrend_Load(object sender, EventArgs e)
         {
             // populate the drop down lists
-            for (int i = 1; i <= 5; i++)
+            for (int i = 0; i <= 5; i++)
             {
                 ddlDown.Items.Add(i);
                 ddlUp.Items.Add(i);
@@ -48,8 +48,8 @@ namespace Stock_YahooFinance
             }
 
             // setup the up and down indexes and which ones to display first
-            int upIndex = ddlUp.SelectedIndex == -1 ? 0 : ddlUp.SelectedIndex + 1;
-            int downIndex = ddlDown.SelectedIndex == -1 ? 0 : ddlDown.SelectedIndex + 1;
+            int upIndex = ddlUp.SelectedIndex == -1 ? 0 : ddlUp.SelectedIndex;
+            int downIndex = ddlDown.SelectedIndex == -1 ? 0 : ddlDown.SelectedIndex;
 
             // get first and second label based on which one is bigger
             int firstIndex = upIndex > downIndex ? upIndex : downIndex;
@@ -76,29 +76,46 @@ namespace Stock_YahooFinance
             lstResults.Items.Add("-------".PadRight(11) + new string('-', finalLabel1.Length).PadRight(11) +
                 new string('-', finalLabel2.Length));       
 
-
+            // loop thru all tickers in ticker list
             foreach (string ticker in tickerList)
             {
+                // create stock object and see if it conforms
                 Stock stks = new Stock(ticker);
                 bool qualify = await stks.StockConform(upIndex, downIndex);
 
+                // if conform, then add its ticker and prices to listbox
                 if (qualify)
                 {
-                    var priceList = await stks.GetPriceLabels(upIndex, downIndex);
+                    var priceList = await stks.GetPriceLabels(firstIndex, secondIndex);
                     lstResults.Items.Add(stks.ticker.PadRight(11) + priceList[0].PadRight(11) +
                         priceList[1]);
                 }
             }
 
-            MessageBox.Show("Done");
+            int numMatches = lstResults.Items.Count - 2;
+            string msg = numMatches.ToString() + " records matched the criteria";
+            ChangeStatusLabel(stslblStatus, msg);       
         }
 
 
+        private void ChangeStatusLabel(ToolStripLabel status, string msg)
+        {
+            // displays the message, then erase it after 5 seconds
+            status.Text = msg;
+
+            var timer = new Timer();
+            timer.Interval = 8000;
+            timer.Tick += (s, e) =>
+            {
+                status.Text = "";
+                timer.Stop();
+            };
+            timer.Start();
+        }
+
         private void tosbtnClear_Click(object sender, EventArgs e)
         {
-            string test = "\u2193" + "4 days";
-
-            MessageBox.Show(test);
+            lstResults.Items.Clear();
         }
     }
 }
