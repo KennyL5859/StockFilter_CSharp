@@ -13,6 +13,7 @@ namespace Stock_YahooFinance
     public partial class frmTrend : Form
     {
         List<string> tickerList = new List<string>();
+        List<string> qualifyTicList = new List<string>();
 
         public frmTrend()
         {
@@ -37,8 +38,9 @@ namespace Stock_YahooFinance
 
         private async void tosbtnSearch_Click(object sender, EventArgs e)
         {
-            // clear listbox items
+            // clear listbox items and qualified ticker list
             lstResults.Items.Clear();
+            qualifyTicList.Clear();
 
             // prompt user if no up or down number of days is selected
             if (ddlDown.SelectedIndex == -1 && ddlUp.SelectedIndex == -1)
@@ -86,12 +88,14 @@ namespace Stock_YahooFinance
                 // if conform, then add its ticker and prices to listbox
                 if (qualify)
                 {
+                    qualifyTicList.Add(ticker);
                     var priceList = await stks.GetPriceLabels(firstIndex, secondIndex);
                     lstResults.Items.Add(stks.ticker.PadRight(11) + priceList[0].PadRight(11) +
                         priceList[1]);
                 }
             }
 
+            // display number of matches on status label
             int numMatches = lstResults.Items.Count - 2;
             string msg = numMatches.ToString() + " records matched the criteria";
             ChangeStatusLabel(stslblStatus, msg);       
@@ -115,7 +119,22 @@ namespace Stock_YahooFinance
 
         private void tosbtnClear_Click(object sender, EventArgs e)
         {
+            // clear results listbox and qualified ticker list
             lstResults.Items.Clear();
+            qualifyTicList.Clear();
+        }
+
+        private void tosbtnChart_Click(object sender, EventArgs e)
+        {
+            if (qualifyTicList.Count == 0)
+            {
+                MessageBox.Show("You must have qualified stocks in orders to graph");
+                return;
+            }
+
+            int selTickerIndex = lstResults.SelectedIndex == -1 ? -1 : lstResults.SelectedIndex - 2;
+
+            MessageBox.Show("HI");
         }
     }
 }

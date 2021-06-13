@@ -31,7 +31,8 @@ namespace Stock_YahooFinance
         }
 
         public async Task<List<string>> GetPriceLabels(int fIndex, int sIndex)
-        {
+        {   
+            // calculates and returns two prices as strings in list ex. [$123.33, $125.45]
             List<string> priceList = new List<string>();
             await GetHistoricalPrices(DateTime.Today.AddDays(-18), DateTime.Today);
             int first = this.PriceHistory.Count - fIndex - sIndex - 1;
@@ -47,6 +48,7 @@ namespace Stock_YahooFinance
 
         public async Task<List<string>> GetDateLabels(int fIndex, int sIndex)
         {
+            // calculates and returns two dates as strings in a list ex. [5/28, 5/30]
             List<string> dateList = new List<string>();
             await GetHistoricalPricesDates(DateTime.Today.AddDays(-18), DateTime.Today);
             int first = this.PriceHistoryDates.Count - fIndex - sIndex - 1;
@@ -62,6 +64,7 @@ namespace Stock_YahooFinance
 
         public async Task<bool> StockConform(int uIndex, int dIndex)
         {
+            // test and see if stock qualifies for number of up days and number of down days
             DateTime today = DateTime.Now;
             DateTime priorDate = today.AddDays(-15);
             await GetHistoricalPrices(priorDate, today);
