@@ -34,7 +34,7 @@ namespace Stock_YahooFinance
         {   
             // calculates and returns two prices as strings in list ex. [$123.33, $125.45]
             List<string> priceList = new List<string>();
-            await GetHistoricalPrices(DateTime.Today.AddDays(-18), DateTime.Today);
+            await GetHistoricalPrices(DateTime.Today.AddDays(-18), DateTime.Today.AddDays(1));
             int first = this.PriceHistory.Count - fIndex - sIndex - 1;
             int second = this.PriceHistory.Count - sIndex - 1;
             decimal price1 = this.PriceHistory.ElementAt(first).Value;
@@ -49,8 +49,8 @@ namespace Stock_YahooFinance
         public async Task<List<string>> GetDateLabels(int fIndex, int sIndex)
         {
             // calculates and returns two dates as strings in a list ex. [5/28, 5/30]
-            List<string> dateList = new List<string>();
-            await GetHistoricalPricesDates(DateTime.Today.AddDays(-18), DateTime.Today);
+            List<string> dateList = new List<string>();        
+            await GetHistoricalPricesDates(DateTime.Today.AddDays(-18), DateTime.Today.AddDays(1));
             int first = this.PriceHistoryDates.Count - fIndex - sIndex - 1;
             int second = this.PriceHistoryDates.Count - sIndex - 1;
             DateTime firstDate = this.PriceHistoryDates.ElementAt(first).Key;

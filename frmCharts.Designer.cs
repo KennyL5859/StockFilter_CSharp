@@ -92,6 +92,7 @@ namespace Stock_YahooFinance
             this.Controls.Add(this.chtTrends);
             this.Name = "frmCharts";
             this.Text = "Trend Charts";
+            this.Load += new System.EventHandler(this.frmCharts_Load);
             ((System.ComponentModel.ISupportInitialize)(this.chtTrends)).EndInit();
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();

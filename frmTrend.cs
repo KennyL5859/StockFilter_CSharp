@@ -54,8 +54,8 @@ namespace Stock_YahooFinance
             int downIndex = ddlDown.SelectedIndex == -1 ? 0 : ddlDown.SelectedIndex;
 
             // get first and second label based on which one is bigger
-            int firstIndex = upIndex > downIndex ? upIndex : downIndex;
-            int secondIndex = upIndex > downIndex ? downIndex : upIndex;            
+            int firstIndex = upIndex >= downIndex ? upIndex : downIndex;
+            int secondIndex = upIndex >= downIndex ? downIndex : upIndex;            
 
             // turn the labels into strings with up and down arrows
             string strFIndex = upIndex > downIndex ? "\u2191" + upIndex : "\u2193" + downIndex;
@@ -130,9 +130,20 @@ namespace Stock_YahooFinance
             {
                 MessageBox.Show("You must have qualified stocks in orders to graph");
                 return;
-            }
+            } 
 
+            // setup the up and down indexes and which ones to display first
+            int upIndex = ddlUp.SelectedIndex == -1 ? 0 : ddlUp.SelectedIndex;
+            int downIndex = ddlDown.SelectedIndex == -1 ? 0 : ddlDown.SelectedIndex;
+
+            // get first and second label based on which one is bigger
+            int firstIndex = upIndex > downIndex ? upIndex : downIndex;
+            int secondIndex = upIndex > downIndex ? downIndex : upIndex;
             int selTickerIndex = lstResults.SelectedIndex == -1 ? -1 : lstResults.SelectedIndex - 2;
+
+            frmCharts chartForm = new frmCharts(qualifyTicList, firstIndex, secondIndex, selTickerIndex);
+            chartForm.ShowDialog();
+            
 
             MessageBox.Show("HI");
         }

@@ -31,6 +31,12 @@ namespace Stock_YahooFinance
             this.selIndex = selected;
         }
 
-
+        private void frmCharts_Load(object sender, EventArgs e)
+        {
+            for (int i = 0; i < tickerList.Count; i++)
+            {
+                ddlTickers.Items.Add(tickerList[i]);
+            }
+        }
     }
 }
