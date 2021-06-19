@@ -72,11 +72,13 @@ namespace Stock_YahooFinance
             var dateLabels = await sts.GetDateLabels(firstIndex, secondIndex);
             string finalLabel1 = strFIndex + " " + dateLabels[0];
             string finalLabel2 = strSIndex + " " + dateLabels[1];
+            string finalLabel3 = "% " + "\u25B2" + "    ";
 
             // add the final label to the listbox
-            lstResults.Items.Add("Tickers".PadRight(11) + finalLabel1.PadRight(11) + finalLabel2);
+            lstResults.Items.Add("Tickers".PadRight(11) + finalLabel1.PadRight(11) + finalLabel2.PadRight(11)
+                + finalLabel3);
             lstResults.Items.Add("-------".PadRight(11) + new string('-', finalLabel1.Length).PadRight(11) +
-                new string('-', finalLabel2.Length));       
+                new string('-', finalLabel2.Length).PadRight(11) + new string('-', finalLabel3.Length));       
 
             // loop thru all tickers in ticker list
             foreach (string ticker in tickerList)
@@ -91,7 +93,7 @@ namespace Stock_YahooFinance
                     qualifyTicList.Add(ticker);
                     var priceList = await stks.GetPriceLabels(firstIndex, secondIndex);
                     lstResults.Items.Add(stks.ticker.PadRight(11) + priceList[0].PadRight(11) +
-                        priceList[1]);
+                        priceList[1].PadRight(11) + priceList[2]);
                 }
             }
 

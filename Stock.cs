@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -39,10 +40,13 @@ namespace Stock_YahooFinance
             int second = this.PriceHistory.Count - sIndex - 1;
             decimal price1 = this.PriceHistory.ElementAt(first).Value;
             decimal price2 = this.PriceHistory.ElementAt(second).Value;
+            decimal rawPercent = (price2 - price1) / price1;
+            string finalPercent = rawPercent.ToString("P", CultureInfo.InvariantCulture);
             string strPrice1 = "$" + Math.Round(price1, 2).ToString();
             string strPrice2 = "$" + Math.Round(price2, 2).ToString();
             priceList.Add(strPrice1);
             priceList.Add(strPrice2);
+            priceList.Add(finalPercent);
             return priceList;
         }
 
