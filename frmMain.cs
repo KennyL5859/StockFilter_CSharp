@@ -174,19 +174,17 @@ namespace Stock_YahooFinance
 
         private async void GetPrice()
         {
-            //string ticker = "AAPL";
-            //var stock = await Yahoo.Symbols(ticker).Fields(Field.FiftyDayAverage).QueryAsync();
-            //var stockTic = stock[ticker];
-            //double x = Convert.ToDouble(stockTic[Field.FiftyDayAverage]);
+
 
             Stock sts = new Stock("SPY");
 
-            //DateTime start = new DateTime(2021, 5, 20);
-            //DateTime end = new DateTime(2021, 6, 4);
-            //await sts.GetHistoricalPrices(start, end);         
+            int first = 3;
+            int second = 1;
 
 
-            bool ans = await sts.StockConform(1, 1);
+            var x = await sts.GetChartLabels(first, second);
+
+    
             MessageBox.Show("test");            
 
         }

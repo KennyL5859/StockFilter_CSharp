@@ -42,19 +42,22 @@ namespace Stock_YahooFinance
             // 
             // chtTrends
             // 
+            chartArea1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            chartArea1.BorderWidth = 5;
             chartArea1.Name = "ChartArea1";
             this.chtTrends.ChartAreas.Add(chartArea1);
             legend1.Name = "Legend1";
             this.chtTrends.Legends.Add(legend1);
             this.chtTrends.Location = new System.Drawing.Point(35, 109);
             this.chtTrends.Name = "chtTrends";
+            series1.BorderWidth = 5;
             series1.ChartArea = "ChartArea1";
+            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
             series1.Legend = "Legend1";
-            series1.Name = "Series1";
+            series1.Name = "Price";
             this.chtTrends.Series.Add(series1);
             this.chtTrends.Size = new System.Drawing.Size(708, 330);
             this.chtTrends.TabIndex = 0;
-            this.chtTrends.Text = "chart1";
             // 
             // ddlTickers
             // 
@@ -65,6 +68,7 @@ namespace Stock_YahooFinance
             this.ddlTickers.Name = "ddlTickers";
             this.ddlTickers.Size = new System.Drawing.Size(108, 33);
             this.ddlTickers.TabIndex = 1;
+            this.ddlTickers.SelectedIndexChanged += new System.EventHandler(this.ddlTickers_SelectedIndexChanged);
             // 
             // statusStrip1
             // 

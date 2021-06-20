@@ -31,9 +31,27 @@ namespace Stock_YahooFinance
             this.ticker = ticSymbol;
         }
 
+        public async Task<Dictionary<string, double>> GetChartLabels(int fIndex, int sIndex)
+        {
+            Dictionary<string, double> priceDic = new Dictionary<string, double>();
+            await GetHistoricalPricesDates(DateTime.Today.AddDays(-18), DateTime.Today.AddDays(1));
+            int first = this.PriceHistoryDates.Count - fIndex - sIndex - 1;
+            int second = this.PriceHistoryDates.Count - sIndex - 1;
+
+            for (int i = first; i < this.PriceHistoryDates.Count; i++)
+            {
+                DateTime tDate = this.PriceHistoryDates.ElementAt(i).Key;
+                double tPrice = Convert.ToDouble(this.PriceHistoryDates.ElementAt(i).Value);
+                string sDate = tDate.Month + "/" + tDate.Day;          
+                priceDic.Add(sDate, tPrice);
+            }
+
+            return priceDic;
+        }
+
         public async Task<List<string>> GetPriceLabels(int fIndex, int sIndex)
         {   
-            // calculates and returns two prices as strings in list ex. [$123.33, $125.45]
+            // calculates and returns two prices and percent as strings in list ex. [$123.33, $125.45, 1.72%]
             List<string> priceList = new List<string>();
             await GetHistoricalPrices(DateTime.Today.AddDays(-18), DateTime.Today.AddDays(1));
             int first = this.PriceHistory.Count - fIndex - sIndex - 1;
@@ -206,7 +224,6 @@ namespace Stock_YahooFinance
             this.MA50_Change_Percent = stockTic[Field.FiftyDayAverageChangePercent];
             this.MA200_Change = stockTic[Field.TwoHundredDayAverageChange];
             this.MA200_Change_Percent = stockTic[Field.TwoHundredDayAverageChangePercent];
-
         }
 
     }

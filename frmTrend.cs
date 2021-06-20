@@ -144,10 +144,8 @@ namespace Stock_YahooFinance
             int selTickerIndex = lstResults.SelectedIndex == -1 ? -1 : lstResults.SelectedIndex - 2;
 
             frmCharts chartForm = new frmCharts(qualifyTicList, firstIndex, secondIndex, selTickerIndex);
-            chartForm.ShowDialog();
-            
+            chartForm.ShowDialog();          
 
-            MessageBox.Show("HI");
         }
     }
 }
