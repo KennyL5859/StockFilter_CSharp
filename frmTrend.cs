@@ -147,5 +147,14 @@ namespace Stock_YahooFinance
             chartForm.ShowDialog();          
 
         }
+
+        private void lstResults_DoubleClick(object sender, EventArgs e)
+        {
+            // chart it when user double clicks on a stock
+            if (lstResults.SelectedIndex > 1)
+            {
+                tosbtnChart_Click(sender, e);
+            }
+        }
     }
 }

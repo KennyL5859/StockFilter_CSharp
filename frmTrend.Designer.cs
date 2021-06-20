@@ -56,6 +56,7 @@ namespace Stock_YahooFinance
             this.lstResults.Name = "lstResults";
             this.lstResults.Size = new System.Drawing.Size(593, 312);
             this.lstResults.TabIndex = 0;
+            this.lstResults.DoubleClick += new System.EventHandler(this.lstResults_DoubleClick);
             // 
             // toolStrip1
             // 

@@ -32,16 +32,12 @@ namespace Stock_YahooFinance
             this.selIndex = selected;
         }
 
-
-
         private void ddlTickers_SelectedIndexChanged(object sender, EventArgs e)
         {
+            // create new chart when new ticker is selected
             if (ddlTickers.SelectedIndex != -1)
-            {
-
-         
+            {         
                 CreateChart(tickerList[ddlTickers.SelectedIndex]);
-
             }
         }       
 
@@ -52,9 +48,11 @@ namespace Stock_YahooFinance
                 ddlTickers.Items.Add(tickerList[i]);
 
             // if there is a selection
-            if (selIndex != -1)      
+            if (selIndex != -1)
+            {
+                ddlTickers.SelectedIndex = selIndex;
                 CreateChart(tickerList[selIndex]);
-            
+            }           
         }
 
         private async void CreateChart(string ticker)
@@ -78,11 +76,16 @@ namespace Stock_YahooFinance
             // customize the chart to look good
             var objChart = chtTrends.ChartAreas[0];
             objChart.AxisY.IntervalAutoMode = System.Windows.Forms.DataVisualization.Charting.IntervalAutoMode.VariableCount;
+            objChart.AxisX.IntervalAutoMode = System.Windows.Forms.DataVisualization.Charting.IntervalAutoMode.VariableCount;
             objChart.AxisX.IntervalType = System.Windows.Forms.DataVisualization.Charting.DateTimeIntervalType.Number;
             double yMax = datePrices.ElementAt(0).Value;
             double yMin = datePrices.ElementAt(0).Value;
+            double lastPrice = datePrices.ElementAt(datePrices.Count - 1).Value;
 
+            // set line color based on whether stock went up or down
+            chtTrends.Series["Price"].Color = yMax > lastPrice ? Color.Red : Color.Green;
 
+            // plot all the x-axis and y-axis
             foreach (var point in datePrices)
             {
                 chtTrends.Series["Price"].Points.AddXY(point.Key, point.Value);
@@ -96,6 +99,21 @@ namespace Stock_YahooFinance
 
             objChart.AxisY.Maximum = Math.Round(yMax + (yMax - yMin) * 0.2, 0);
             objChart.AxisY.Minimum = Math.Round(yMin - (yMax - yMin) * 0.2, 0);
+
+            CreateStatusLabels();
+        }
+
+        private async void CreateStatusLabels()
+        {
+            // create a status label that shows begin price, end price and percentage change
+            stslblStatus.Text = "";
+            string ticker = tickerList[ddlTickers.SelectedIndex];
+            Stock stks = new Stock(ticker);
+            var dates = await stks.GetDateLabels(fIndex, sIndex);
+            var prices = await stks.GetPriceLabels(fIndex, sIndex);
+            string first = dates[0] + "-" + prices[0];
+            string second = dates[1] + "-" + prices[1];
+            stslblStatus.Text = first + "    " + second + "     " + prices[2];
         }
 
     }
