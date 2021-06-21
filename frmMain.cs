@@ -122,14 +122,23 @@ namespace Stock_YahooFinance
             ChangeStatusLabel(stslblStauts, msg);
         }
 
+        private void tosbtnChart_Click(object sender, EventArgs e)
+        {
+            // open up new form and pass in fields
+            frmCharts newChart = new frmCharts(tickerList, 6, 6, lstTickers.SelectedIndex, 3);
+            newChart.ShowDialog();
+        }
+
         private void btn50Day_Click(object sender, EventArgs e)
         {
+            // open from 50MA
             frm50MA new50MA = new frm50MA(tickerList);
             new50MA.ShowDialog();
         }
 
         private void btnTrend_Click(object sender, EventArgs e)
         {
+            // open trend form
             frmTrend trendForm = new frmTrend(tickerList);
             trendForm.ShowDialog();
         }
@@ -174,19 +183,11 @@ namespace Stock_YahooFinance
 
         private async void GetPrice()
         {
-
-
             Stock sts = new Stock("SPY");
-
             int first = 3;
             int second = 1;
-
-
-            var x = await sts.GetChartLabels(first, second);
-
-    
-            MessageBox.Show("test");            
-
+            var x = await sts.GetChartLabels(first, second);    
+            MessageBox.Show("test");
         }
 
 

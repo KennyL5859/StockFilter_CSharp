@@ -41,6 +41,7 @@ namespace Stock_YahooFinance
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.btn50Day = new System.Windows.Forms.Button();
             this.btnTrend = new System.Windows.Forms.Button();
+            this.tosbtnChart = new System.Windows.Forms.ToolStripButton();
             this.statusStp.SuspendLayout();
             this.tolStp.SuspendLayout();
             this.SuspendLayout();
@@ -85,7 +86,8 @@ namespace Stock_YahooFinance
             this.tosbtnAdd,
             this.tosbtnDelete,
             this.tosbtnEdit,
-            this.toolStripSeparator1});
+            this.toolStripSeparator1,
+            this.tosbtnChart});
             this.tolStp.Location = new System.Drawing.Point(0, 0);
             this.tolStp.Name = "tolStp";
             this.tolStp.Size = new System.Drawing.Size(521, 33);
@@ -151,6 +153,16 @@ namespace Stock_YahooFinance
             this.btnTrend.UseVisualStyleBackColor = false;
             this.btnTrend.Click += new System.EventHandler(this.btnTrend_Click);
             // 
+            // tosbtnChart
+            // 
+            this.tosbtnChart.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.tosbtnChart.Image = ((System.Drawing.Image)(resources.GetObject("tosbtnChart.Image")));
+            this.tosbtnChart.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tosbtnChart.Name = "tosbtnChart";
+            this.tosbtnChart.Size = new System.Drawing.Size(34, 28);
+            this.tosbtnChart.Text = "Chart";
+            this.tosbtnChart.Click += new System.EventHandler(this.tosbtnChart_Click);
+            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
@@ -186,6 +198,7 @@ namespace Stock_YahooFinance
         private System.Windows.Forms.ToolStripStatusLabel toslblStatus;
         private System.Windows.Forms.Button btn50Day;
         private System.Windows.Forms.Button btnTrend;
+        private System.Windows.Forms.ToolStripButton tosbtnChart;
     }
 }
 

@@ -58,6 +58,7 @@ namespace Stock_YahooFinance
             this.chtTrends.Series.Add(series1);
             this.chtTrends.Size = new System.Drawing.Size(708, 330);
             this.chtTrends.TabIndex = 0;
+            this.chtTrends.Text = "  ";
             // 
             // ddlTickers
             // 

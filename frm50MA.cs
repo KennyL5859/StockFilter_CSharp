@@ -83,7 +83,7 @@ namespace Stock_YahooFinance
 
             // create Chart form object and display it and pass in selected index of listbox
             int selIndex = lstResults.SelectedIndex == -1 ? -1 : lstResults.SelectedIndex - 2;
-            frmCharts newChart = new frmCharts(ticList, 8, 8, selIndex, 1);
+            frmCharts newChart = new frmCharts(ticList, 6, 6, selIndex, 1);
             newChart.ShowDialog();
 
 

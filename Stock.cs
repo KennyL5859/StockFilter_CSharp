@@ -35,8 +35,7 @@ namespace Stock_YahooFinance
         {
             Dictionary<string, double> priceDic = new Dictionary<string, double>();
             await GetHistoricalPricesDates(DateTime.Today.AddDays(-18), DateTime.Today.AddDays(1));
-            int first = this.PriceHistoryDates.Count - fIndex - sIndex - 1;
-            int second = this.PriceHistoryDates.Count - sIndex - 1;
+            int first = this.PriceHistoryDates.Count - fIndex - sIndex - 1;        
 
             for (int i = first; i < this.PriceHistoryDates.Count; i++)
             {
