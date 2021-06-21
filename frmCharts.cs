@@ -17,25 +17,31 @@ namespace Stock_YahooFinance
         int fIndex;
         int sIndex;
         int selIndex;
+        int typeGraph;
 
         public frmCharts()
         {
             InitializeComponent();
         }
 
-        public frmCharts(List<string> tList, int first, int second, int selected)
+        public frmCharts(List<string> tList, int first, int second, int selected, int type)
         {
             InitializeComponent();
             this.tickerList = tList;
             this.fIndex = first;
             this.sIndex = second;
             this.selIndex = selected;
+            this.typeGraph = type;
         }
 
         private void ddlTickers_SelectedIndexChanged(object sender, EventArgs e)
         {
-            // create new chart when new ticker is selected
-            if (ddlTickers.SelectedIndex != -1)
+            // check which type of graph and drop down list index to create chart
+            if (this.typeGraph == 1 && ddlTickers.SelectedIndex != -1)
+            {
+
+            }
+            else if (this.typeGraph == 2 && ddlTickers.SelectedIndex != -1)
             {         
                 CreateChart(tickerList[ddlTickers.SelectedIndex]);
             }
@@ -47,12 +53,40 @@ namespace Stock_YahooFinance
             for (int i = 0; i < tickerList.Count; i++)
                 ddlTickers.Items.Add(tickerList[i]);
 
-            // if there is a selection
-            if (selIndex != -1)
+            // determines which type of graph it is
+            if (this.typeGraph == 1)
             {
-                ddlTickers.SelectedIndex = selIndex;
-                CreateChart(tickerList[selIndex]);
-            }           
+                // if there is a selection passed in, then graph it
+                if (selIndex != -1)
+                {
+                    ddlTickers.SelectedIndex = selIndex;
+                    CreateMAChart(tickerList[selIndex]);
+                }
+            }
+            else if (this.typeGraph == 2)
+            {
+                // if there is a selection passed in, then graph it
+                if (selIndex != -1)
+                {
+                    ddlTickers.SelectedIndex = selIndex;
+                    CreateChart(tickerList[selIndex]);
+                }
+            }          
+        }
+
+        private async void CreateMAChart(string ticker)
+        {
+            Stock stks = new Stock(ticker);
+
+            // clear the existing charts and set it to line chart and customize it
+            chtTrends.Series.Clear();
+            chtTrends.Titles.Clear();
+            chtTrends.Series.Add("Price");
+            chtTrends.Series.Add("50 MA");
+            chtTrends.Series.Add("200 MA");
+            chtTrends.Series["Price"].BorderWidth = 5;
+            chtTrends.Series["50 MA"].BorderWidth = 5;
+            chtTrends.Series["200 MA"].BorderWidth = 5;
         }
 
         private async void CreateChart(string ticker)

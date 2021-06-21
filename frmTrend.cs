@@ -143,7 +143,7 @@ namespace Stock_YahooFinance
             int secondIndex = upIndex > downIndex ? downIndex : upIndex;
             int selTickerIndex = lstResults.SelectedIndex == -1 ? -1 : lstResults.SelectedIndex - 2;
 
-            frmCharts chartForm = new frmCharts(qualifyTicList, firstIndex, secondIndex, selTickerIndex);
+            frmCharts chartForm = new frmCharts(qualifyTicList, firstIndex, secondIndex, selTickerIndex, 2);
             chartForm.ShowDialog();          
 
         }

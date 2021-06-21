@@ -13,6 +13,7 @@ namespace Stock_YahooFinance
     public partial class frm50MA : Form
     {
         List<string> tickerList = new List<string>();
+        List<string> ticList = new List<string>();
         public frm50MA()
         {
             InitializeComponent();
@@ -61,8 +62,36 @@ namespace Stock_YahooFinance
             lstResults.Items.Clear();
         }
 
+        private void tosbtnChart_Click(object sender, EventArgs e)
+        {
+            // clear contents of ticList
+            ticList.Clear();
+
+            // if there are no tickers to chart, prompt the user
+            if (lstResults.Items.Count <= 2)
+            {
+                MessageBox.Show("There are now stocks to chart");
+                return;
+            }
+
+            // add tickers to the ticList
+            for (int i = 2; i < lstResults.Items.Count; i++)
+            {
+                string[] splitTics = lstResults.Items[i].ToString().Split(' ');
+                ticList.Add(splitTics[0]);
+            }
+
+            // create Chart form object and display it and pass in selected index of listbox
+            int selIndex = lstResults.SelectedIndex == -1 ? -1 : lstResults.SelectedIndex - 2;
+            frmCharts newChart = new frmCharts(ticList, 8, 8, selIndex, 1);
+            newChart.ShowDialog();
+
+
+        }
+
         private async Task FillListBox(double percentRange)
         {
+            // fill in the listbox based on moving average percentages criteria
             lstResults.Items.Clear();
             lstResults.Items.Add("Ticker".PadRight(10) + "% Change");
             lstResults.Items.Add("------".PadRight(10) + "--------");
@@ -179,5 +208,7 @@ namespace Stock_YahooFinance
             };
             timer.Start();
         }
+
+
     }
 }
