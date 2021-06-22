@@ -43,7 +43,7 @@ namespace Stock_YahooFinance
             }
             else if (this.typeGraph == 2 && ddlTickers.SelectedIndex != -1)
             {         
-                CreateChart(tickerList[ddlTickers.SelectedIndex]);
+                CreateMAChart(tickerList[ddlTickers.SelectedIndex]);
             }
             else if (this.typeGraph == 3 && ddlTickers.SelectedIndex != -1)
             {
@@ -65,6 +65,7 @@ namespace Stock_YahooFinance
                 {
                     ddlTickers.SelectedIndex = selIndex;
                     CreateMAChart(tickerList[selIndex]);
+                    CreateMAStatusLabels();
                 }
             }
             else if (this.typeGraph == 2)
@@ -73,7 +74,8 @@ namespace Stock_YahooFinance
                 if (selIndex != -1)
                 {
                     ddlTickers.SelectedIndex = selIndex;
-                    CreateChart(tickerList[selIndex]);
+                    CreateMAChart(tickerList[selIndex]);
+                    CreatePriceStatusLabels();
                 }
             }       
             else if (this.typeGraph == 3)
@@ -83,6 +85,7 @@ namespace Stock_YahooFinance
                 {
                     ddlTickers.SelectedIndex = selIndex;
                     CreateMAChart(tickerList[selIndex]);
+                    CreateMAStatusLabels();
                 }
             }
         }
@@ -98,20 +101,13 @@ namespace Stock_YahooFinance
             chtTrends.Series.Clear();
             chtTrends.Titles.Clear();
             chtTrends.Series.Add("Price");
-            chtTrends.Series.Add("50 MA");
-            chtTrends.Series.Add("200 MA");
-            chtTrends.Series["Price"].ChartType = SeriesChartType.Line;
-            chtTrends.Series["50 MA"].ChartType = SeriesChartType.Line;
-            chtTrends.Series["200 MA"].ChartType = SeriesChartType.Line;
+            chtTrends.Series["Price"].ChartType = SeriesChartType.Line; 
             chtTrends.Series["Price"].BorderWidth = 5;
-            chtTrends.Series["50 MA"].BorderWidth = 5;
-            chtTrends.Series["200 MA"].BorderWidth = 5;
-            
 
             // make title, format it and set it 
             Title title = new Title();
             title.Font = new Font("Arial", 14, FontStyle.Bold);
-            title.Text = ticker + " 50/200 MA";
+            title.Text = ticker;
             title.ForeColor = Color.Blue;
             chtTrends.Titles.Add(title);
 
@@ -134,9 +130,7 @@ namespace Stock_YahooFinance
             // draw the 3 lines and find final maxY and minY
             foreach (var point in datePrices)
             {
-                chtTrends.Series["Price"].Points.AddXY(point.Key, point.Value);
-                chtTrends.Series["50 MA"].Points.AddXY(point.Key, MA50);
-                chtTrends.Series["200 MA"].Points.AddXY(point.Key, MA200);
+                chtTrends.Series["Price"].Points.AddXY(point.Key, point.Value); 
 
                 if (point.Value > yMax)
                     yMax = point.Value;
@@ -148,56 +142,7 @@ namespace Stock_YahooFinance
             // add 20% more cushion to top and bottom of graph and label it
             objChart.AxisY.Maximum = Math.Round(yMax + (yMax - yMin) * 0.2, 0);
             objChart.AxisY.Minimum = Math.Round(yMin - (yMax - yMin) * 0.2, 0);
-            CreateMAStatusLabels();
-        }
-
-        private async void CreateChart(string ticker)
-        {
-            Stock stks = new Stock(ticker);
-            var datePrices = await stks.GetChartLabels(fIndex, sIndex);
-
-            // clear the existing charts and set it to line chart and customize it
-            chtTrends.Series.Clear();
-            chtTrends.Titles.Clear();
-            chtTrends.Series.Add("Price");
-            chtTrends.Series["Price"].ChartType = SeriesChartType.Line;
-            chtTrends.Series["Price"].BorderWidth = 5;
-
-            // format title and set it
-            Title title = new Title();
-            title.Font = new Font("Arial", 14, FontStyle.Bold);
-            title.Text = ticker;
-            chtTrends.Titles.Add(title);
-
-            // customize the chart to look good
-            var objChart = chtTrends.ChartAreas[0];
-            objChart.AxisY.IntervalAutoMode = System.Windows.Forms.DataVisualization.Charting.IntervalAutoMode.VariableCount;
-            objChart.AxisX.IntervalAutoMode = System.Windows.Forms.DataVisualization.Charting.IntervalAutoMode.VariableCount;
-            objChart.AxisX.IntervalType = System.Windows.Forms.DataVisualization.Charting.DateTimeIntervalType.Number;
-            double yMax = datePrices.ElementAt(0).Value;
-            double yMin = datePrices.ElementAt(0).Value;
-            double lastPrice = datePrices.ElementAt(datePrices.Count - 1).Value;
-
-            // set line color based on whether stock went up or down
-            chtTrends.Series["Price"].Color = yMax > lastPrice ? Color.Red : Color.Green;
-
-            // plot all the x-axis and y-axis
-            foreach (var point in datePrices)
-            {
-                chtTrends.Series["Price"].Points.AddXY(point.Key, point.Value);
-
-                if (point.Value > yMax)
-                    yMax = point.Value;
-
-                if (point.Value < yMin)
-                    yMin = point.Value;
-            }
-
-            objChart.AxisY.Maximum = Math.Round(yMax + (yMax - yMin) * 0.2, 0);
-            objChart.AxisY.Minimum = Math.Round(yMin - (yMax - yMin) * 0.2, 0);
-
-            CreatePriceStatusLabels();
-        }
+        }  
 
         private async void CreateMAStatusLabels()
         {
@@ -226,5 +171,56 @@ namespace Stock_YahooFinance
             stslblStatus.Text = first + "    " + second + "     " + prices[2];
         }
 
+        private async void chkMA50_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkMA50.Checked)
+            {
+                // create stock object using ticker on drop down list
+                string ticker = tickerList[ddlTickers.SelectedIndex];
+                Stock stks = new Stock(ticker);
+                var datePrices = await stks.GetChartLabels(fIndex, sIndex);
+                await stks.GetStockData();
+
+                double MA50 = stks.MA50;
+
+                // create a series and format it
+                chtTrends.Series.Add("50 MA");
+                chtTrends.Series["50 MA"].ChartType = SeriesChartType.Line;
+                chtTrends.Series["50 MA"].BorderWidth = 3;
+                
+                foreach (var point in datePrices)                
+                    chtTrends.Series["50 MA"].Points.AddXY(point.Key, MA50);
+            }
+            else
+            {
+                chtTrends.Series.Remove(chtTrends.Series["50 MA"]);
+            }
+        }
+
+        private async void chkMA200_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkMA200.Checked)
+            {
+                // create stock object using ticker on drop down list
+                string ticker = tickerList[ddlTickers.SelectedIndex];
+                Stock stks = new Stock(ticker);
+                var datePrices = await stks.GetChartLabels(fIndex, sIndex);
+                await stks.GetStockData();
+
+                double MA200 = stks.MA200;
+
+                // create a series and format it
+                chtTrends.Series.Add("200 MA");
+                chtTrends.Series["200 MA"].ChartType = SeriesChartType.Line;
+                chtTrends.Series["200 MA"].BorderWidth = 3;
+
+                foreach (var point in datePrices)
+                    chtTrends.Series["200 MA"].Points.AddXY(point.Key, MA200);
+            }
+            else
+            {
+                chtTrends.Series.Remove(chtTrends.Series["200 MA"]);
+            }
+        }
     }
 }

@@ -29,33 +29,35 @@ namespace Stock_YahooFinance
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.chtTrends = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.ddlTickers = new System.Windows.Forms.ComboBox();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.stslblStatus = new System.Windows.Forms.ToolStripStatusLabel();
+            this.chkMA50 = new System.Windows.Forms.CheckBox();
+            this.chkMA200 = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.chtTrends)).BeginInit();
             this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // chtTrends
             // 
-            chartArea1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            chartArea1.BorderWidth = 5;
-            chartArea1.Name = "ChartArea1";
-            this.chtTrends.ChartAreas.Add(chartArea1);
-            legend1.Name = "Legend1";
-            this.chtTrends.Legends.Add(legend1);
+            chartArea2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            chartArea2.BorderWidth = 5;
+            chartArea2.Name = "ChartArea1";
+            this.chtTrends.ChartAreas.Add(chartArea2);
+            legend2.Name = "Legend1";
+            this.chtTrends.Legends.Add(legend2);
             this.chtTrends.Location = new System.Drawing.Point(35, 109);
             this.chtTrends.Name = "chtTrends";
-            series1.BorderWidth = 5;
-            series1.ChartArea = "ChartArea1";
-            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series1.Legend = "Legend1";
-            series1.Name = "Price";
-            this.chtTrends.Series.Add(series1);
+            series2.BorderWidth = 5;
+            series2.ChartArea = "ChartArea1";
+            series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series2.Legend = "Legend1";
+            series2.Name = "Price";
+            this.chtTrends.Series.Add(series2);
             this.chtTrends.Size = new System.Drawing.Size(708, 330);
             this.chtTrends.TabIndex = 0;
             this.chtTrends.Text = "  ";
@@ -87,11 +89,35 @@ namespace Stock_YahooFinance
             this.stslblStatus.Name = "stslblStatus";
             this.stslblStatus.Size = new System.Drawing.Size(0, 15);
             // 
+            // chkMA50
+            // 
+            this.chkMA50.AutoSize = true;
+            this.chkMA50.Location = new System.Drawing.Point(187, 50);
+            this.chkMA50.Name = "chkMA50";
+            this.chkMA50.Size = new System.Drawing.Size(81, 24);
+            this.chkMA50.TabIndex = 3;
+            this.chkMA50.Text = "MA 50";
+            this.chkMA50.UseVisualStyleBackColor = true;
+            this.chkMA50.CheckedChanged += new System.EventHandler(this.chkMA50_CheckedChanged);
+            // 
+            // chkMA200
+            // 
+            this.chkMA200.AutoSize = true;
+            this.chkMA200.Location = new System.Drawing.Point(306, 50);
+            this.chkMA200.Name = "chkMA200";
+            this.chkMA200.Size = new System.Drawing.Size(90, 24);
+            this.chkMA200.TabIndex = 4;
+            this.chkMA200.Text = "MA 200";
+            this.chkMA200.UseVisualStyleBackColor = true;
+            this.chkMA200.CheckedChanged += new System.EventHandler(this.chkMA200_CheckedChanged);
+            // 
             // frmCharts
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(778, 486);
+            this.Controls.Add(this.chkMA200);
+            this.Controls.Add(this.chkMA50);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.ddlTickers);
             this.Controls.Add(this.chtTrends);
@@ -112,5 +138,7 @@ namespace Stock_YahooFinance
         private System.Windows.Forms.ComboBox ddlTickers;
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.ToolStripStatusLabel stslblStatus;
+        private System.Windows.Forms.CheckBox chkMA50;
+        private System.Windows.Forms.CheckBox chkMA200;
     }
 }
