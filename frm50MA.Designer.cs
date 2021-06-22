@@ -34,12 +34,12 @@ namespace Stock_YahooFinance
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.tosbtnScan = new System.Windows.Forms.ToolStripButton();
             this.tosbtnClear = new System.Windows.Forms.ToolStripButton();
+            this.tosbtnChart = new System.Windows.Forms.ToolStripButton();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.stslblStatus = new System.Windows.Forms.ToolStripStatusLabel();
             this.lstResults = new System.Windows.Forms.ListBox();
             this.rad200MA = new System.Windows.Forms.RadioButton();
             this.rad50MA = new System.Windows.Forms.RadioButton();
-            this.tosbtnChart = new System.Windows.Forms.ToolStripButton();
             this.toolStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -83,9 +83,19 @@ namespace Stock_YahooFinance
             this.tosbtnClear.Image = ((System.Drawing.Image)(resources.GetObject("tosbtnClear.Image")));
             this.tosbtnClear.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tosbtnClear.Name = "tosbtnClear";
-            this.tosbtnClear.Size = new System.Drawing.Size(34, 33);
+            this.tosbtnClear.Size = new System.Drawing.Size(34, 28);
             this.tosbtnClear.Text = "Clear All";
             this.tosbtnClear.Click += new System.EventHandler(this.tosbtnClear_Click);
+            // 
+            // tosbtnChart
+            // 
+            this.tosbtnChart.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.tosbtnChart.Image = ((System.Drawing.Image)(resources.GetObject("tosbtnChart.Image")));
+            this.tosbtnChart.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tosbtnChart.Name = "tosbtnChart";
+            this.tosbtnChart.Size = new System.Drawing.Size(34, 28);
+            this.tosbtnChart.Text = "Chart";
+            this.tosbtnChart.Click += new System.EventHandler(this.tosbtnChart_Click);
             // 
             // statusStrip1
             // 
@@ -112,6 +122,7 @@ namespace Stock_YahooFinance
             this.lstResults.Name = "lstResults";
             this.lstResults.Size = new System.Drawing.Size(285, 340);
             this.lstResults.TabIndex = 4;
+            this.lstResults.DoubleClick += new System.EventHandler(this.lstResults_DoubleClick);
             // 
             // rad200MA
             // 
@@ -135,16 +146,6 @@ namespace Stock_YahooFinance
             this.rad50MA.TabStop = true;
             this.rad50MA.Text = "50 MA";
             this.rad50MA.UseVisualStyleBackColor = true;
-            // 
-            // tosbtnChart
-            // 
-            this.tosbtnChart.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.tosbtnChart.Image = ((System.Drawing.Image)(resources.GetObject("tosbtnChart.Image")));
-            this.tosbtnChart.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.tosbtnChart.Name = "tosbtnChart";
-            this.tosbtnChart.Size = new System.Drawing.Size(34, 28);
-            this.tosbtnChart.Text = "Chart";
-            this.tosbtnChart.Click += new System.EventHandler(this.tosbtnChart_Click);
             // 
             // frm50MA
             // 

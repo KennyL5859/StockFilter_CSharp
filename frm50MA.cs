@@ -85,8 +85,11 @@ namespace Stock_YahooFinance
             int selIndex = lstResults.SelectedIndex == -1 ? -1 : lstResults.SelectedIndex - 2;
             frmCharts newChart = new frmCharts(ticList, 6, 6, selIndex, 1);
             newChart.ShowDialog();
+        }
 
-
+        private void lstResults_DoubleClick(object sender, EventArgs e)
+        {
+            tosbtnChart_Click(sender, e);
         }
 
         private async Task FillListBox(double percentRange)
@@ -96,6 +99,7 @@ namespace Stock_YahooFinance
             lstResults.Items.Add("Ticker".PadRight(10) + "% Change");
             lstResults.Items.Add("------".PadRight(10) + "--------");
 
+            // loop through tickerlist and determine whether stock fits percentage criteria
             for (int i = 0; i < tickerList.Count; i++)
             {
                 string ticker = tickerList[i];
@@ -208,7 +212,5 @@ namespace Stock_YahooFinance
             };
             timer.Start();
         }
-
-
     }
 }

@@ -129,6 +129,11 @@ namespace Stock_YahooFinance
             newChart.ShowDialog();
         }
 
+        private void lstTickers_DoubleClick(object sender, EventArgs e)
+        {
+            tosbtnChart_Click(sender, e);
+        }
+
         private void btn50Day_Click(object sender, EventArgs e)
         {
             // open from 50MA

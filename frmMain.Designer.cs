@@ -39,9 +39,9 @@ namespace Stock_YahooFinance
             this.tosbtnDelete = new System.Windows.Forms.ToolStripButton();
             this.tosbtnEdit = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.tosbtnChart = new System.Windows.Forms.ToolStripButton();
             this.btn50Day = new System.Windows.Forms.Button();
             this.btnTrend = new System.Windows.Forms.Button();
-            this.tosbtnChart = new System.Windows.Forms.ToolStripButton();
             this.statusStp.SuspendLayout();
             this.tolStp.SuspendLayout();
             this.SuspendLayout();
@@ -56,6 +56,7 @@ namespace Stock_YahooFinance
             this.lstTickers.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
             this.lstTickers.Size = new System.Drawing.Size(119, 404);
             this.lstTickers.TabIndex = 0;
+            this.lstTickers.DoubleClick += new System.EventHandler(this.lstTickers_DoubleClick);
             // 
             // statusStp
             // 
@@ -129,6 +130,16 @@ namespace Stock_YahooFinance
             this.toolStripSeparator1.Name = "toolStripSeparator1";
             this.toolStripSeparator1.Size = new System.Drawing.Size(6, 33);
             // 
+            // tosbtnChart
+            // 
+            this.tosbtnChart.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.tosbtnChart.Image = ((System.Drawing.Image)(resources.GetObject("tosbtnChart.Image")));
+            this.tosbtnChart.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tosbtnChart.Name = "tosbtnChart";
+            this.tosbtnChart.Size = new System.Drawing.Size(34, 28);
+            this.tosbtnChart.Text = "Chart";
+            this.tosbtnChart.Click += new System.EventHandler(this.tosbtnChart_Click);
+            // 
             // btn50Day
             // 
             this.btn50Day.BackColor = System.Drawing.Color.DarkCyan;
@@ -152,16 +163,6 @@ namespace Stock_YahooFinance
             this.btnTrend.Text = "Trend";
             this.btnTrend.UseVisualStyleBackColor = false;
             this.btnTrend.Click += new System.EventHandler(this.btnTrend_Click);
-            // 
-            // tosbtnChart
-            // 
-            this.tosbtnChart.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.tosbtnChart.Image = ((System.Drawing.Image)(resources.GetObject("tosbtnChart.Image")));
-            this.tosbtnChart.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.tosbtnChart.Name = "tosbtnChart";
-            this.tosbtnChart.Size = new System.Drawing.Size(34, 28);
-            this.tosbtnChart.Text = "Chart";
-            this.tosbtnChart.Click += new System.EventHandler(this.tosbtnChart_Click);
             // 
             // frmMain
             // 

@@ -32,24 +32,7 @@ namespace Stock_YahooFinance
             this.sIndex = second;
             this.selIndex = selected;
             this.typeGraph = type;
-        }
-
-        private void ddlTickers_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            // check which type of graph and drop down list index to create chart
-            if (this.typeGraph == 1 && ddlTickers.SelectedIndex != -1)
-            {
-                CreateMAChart(tickerList[ddlTickers.SelectedIndex]);
-            }
-            else if (this.typeGraph == 2 && ddlTickers.SelectedIndex != -1)
-            {         
-                CreateMAChart(tickerList[ddlTickers.SelectedIndex]);
-            }
-            else if (this.typeGraph == 3 && ddlTickers.SelectedIndex != -1)
-            {
-                CreateMAChart(tickerList[ddlTickers.SelectedIndex]);
-            }
-        }       
+        }    
 
         private void frmCharts_Load(object sender, EventArgs e)
         {
@@ -57,41 +40,24 @@ namespace Stock_YahooFinance
             for (int i = 0; i < tickerList.Count; i++)
                 ddlTickers.Items.Add(tickerList[i]);
 
-            // determines which type of graph it is
-            if (this.typeGraph == 1)
-            {
-                // if there is a selection passed in, then graph it
-                if (selIndex != -1)
-                {
-                    ddlTickers.SelectedIndex = selIndex;
-                    CreateMAChart(tickerList[selIndex]);
-                    CreateMAStatusLabels();
-                }
-            }
-            else if (this.typeGraph == 2)
-            {
-                // if there is a selection passed in, then graph it
-                if (selIndex != -1)
-                {
-                    ddlTickers.SelectedIndex = selIndex;
-                    CreateMAChart(tickerList[selIndex]);
-                    CreatePriceStatusLabels();
-                }
-            }       
-            else if (this.typeGraph == 3)
-            {
-                // if there is a selection passed in, then graph it
-                if (selIndex != -1)
-                {
-                    ddlTickers.SelectedIndex = selIndex;
-                    CreateMAChart(tickerList[selIndex]);
-                    CreateMAStatusLabels();
-                }
-            }
+            // create the chart
+            CreateMAChart(tickerList[selIndex]);
+
+            ddlTickers.SelectedIndex = selIndex;
+        }
+
+        private void ddlTickers_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            // re-create chart when drop down list changes
+            CreateMAChart(tickerList[ddlTickers.SelectedIndex]);
         }
 
         private async void CreateMAChart(string ticker)
         {
+            chkMA50.Checked = false;
+            chkMA200.Checked = false;
+            
+
             // create stock object, get all data, and get chart labels
             Stock stks = new Stock(ticker);
             await stks.GetStockData();
@@ -142,6 +108,12 @@ namespace Stock_YahooFinance
             // add 20% more cushion to top and bottom of graph and label it
             objChart.AxisY.Maximum = Math.Round(yMax + (yMax - yMin) * 0.2, 0);
             objChart.AxisY.Minimum = Math.Round(yMin - (yMax - yMin) * 0.2, 0);
+
+            if (typeGraph == 2)
+                CreatePriceStatusLabels();
+            else
+                CreateMAStatusLabels();
+
         }  
 
         private async void CreateMAStatusLabels()
@@ -187,6 +159,8 @@ namespace Stock_YahooFinance
                 chtTrends.Series.Add("50 MA");
                 chtTrends.Series["50 MA"].ChartType = SeriesChartType.Line;
                 chtTrends.Series["50 MA"].BorderWidth = 3;
+                chtTrends.Series["50 MA"].LegendText = "50 Day MA";
+                chtTrends.Series["50 MA"].LegendToolTip = "50 Day Moving Average Prices";
                 
                 foreach (var point in datePrices)                
                     chtTrends.Series["50 MA"].Points.AddXY(point.Key, MA50);
@@ -213,6 +187,8 @@ namespace Stock_YahooFinance
                 chtTrends.Series.Add("200 MA");
                 chtTrends.Series["200 MA"].ChartType = SeriesChartType.Line;
                 chtTrends.Series["200 MA"].BorderWidth = 3;
+                chtTrends.Series["200 MA"].LegendText = "200 Day MA";
+                chtTrends.Series["200 MA"].LegendToolTip = "200 Day Moving Average Prices";
 
                 foreach (var point in datePrices)
                     chtTrends.Series["200 MA"].Points.AddXY(point.Key, MA200);
