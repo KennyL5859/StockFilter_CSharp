@@ -27,7 +27,7 @@ namespace Stock_YahooFinance
         private void frmMain_Load(object sender, EventArgs e)
         {
             ReadTickers();
-            //GetPrice();
+            GetPrice();
         }
 
         // method that reads all tickers from text file into list view and ticker list
@@ -189,9 +189,9 @@ namespace Stock_YahooFinance
         private async void GetPrice()
         {
             Stock sts = new Stock("SPY");
-            int first = 3;
-            int second = 1;
-            var x = await sts.GetChartLabels(first, second);    
+            int first = 6;
+            int second = 6;
+            var x = await sts.GetVolumeChartLabels(first, second);
             MessageBox.Show("test");
         }
 

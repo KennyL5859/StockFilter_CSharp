@@ -24,6 +24,7 @@ namespace Stock_YahooFinance
         public double MA200_Change_Percent { get; set; }
         public Dictionary<int, decimal> PriceHistory  { get; set; }
         public Dictionary<DateTime, decimal> PriceHistoryDates { get; set; }
+        public Dictionary<DateTime, decimal> VolumeHistory { get; set; }
 
 
         public Stock(string ticSymbol)
@@ -31,8 +32,26 @@ namespace Stock_YahooFinance
             this.ticker = ticSymbol;
         }
 
+        public async Task<Dictionary<string, double>> GetVolumeChartLabels(int fIndex, int sIndex)
+        {
+            Dictionary<string, double> volumeDic = new Dictionary<string, double>();
+            await GetHistoricalVolumes(DateTime.Today.AddDays(-18), DateTime.Today.AddDays(1));
+            int first = this.VolumeHistory.Count - fIndex - sIndex - 1;
+
+            for (int i = first; i < this.VolumeHistory.Count; i++)
+            {
+                DateTime tDate = this.VolumeHistory.ElementAt(i).Key;
+                double tVolume = Convert.ToDouble(this.VolumeHistory.ElementAt(i).Value);
+                string sDate = tDate.Month + "/" + tDate.Day;
+                volumeDic.Add(sDate, tVolume);
+            }
+
+            return volumeDic;
+        }
+
         public async Task<Dictionary<string, double>> GetChartLabels(int fIndex, int sIndex)
         {
+            // returns a dictionary with historical volumes ex. [5/28, 55544345]
             Dictionary<string, double> priceDic = new Dictionary<string, double>();
             await GetHistoricalPricesDates(DateTime.Today.AddDays(-18), DateTime.Today.AddDays(1));
             int first = this.PriceHistoryDates.Count - fIndex - sIndex - 1;        
@@ -188,7 +207,7 @@ namespace Stock_YahooFinance
 
             foreach (var point in history)
             {
-                this.PriceHistory.Add(begin, point.Close);
+                this.PriceHistory.Add(begin, point.Close);                
                 begin++;
             }
         }
@@ -200,6 +219,16 @@ namespace Stock_YahooFinance
 
             foreach (var point in history)
                 this.PriceHistoryDates.Add(point.DateTime, point.Close);
+        }
+
+        public async Task GetHistoricalVolumes(DateTime start, DateTime end)
+        {
+            // method that gets the historical volumes to graph
+            var history = await Yahoo.GetHistoricalAsync(ticker, start, end);
+            this.VolumeHistory = new Dictionary<DateTime, decimal>();
+
+            foreach (var point in history)
+                this.VolumeHistory.Add(point.DateTime, point.Volume);
         }
 
         public async Task GetStockData()

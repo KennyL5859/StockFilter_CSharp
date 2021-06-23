@@ -29,35 +29,36 @@ namespace Stock_YahooFinance
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.chtTrends = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.ddlTickers = new System.Windows.Forms.ComboBox();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.stslblStatus = new System.Windows.Forms.ToolStripStatusLabel();
             this.chkMA50 = new System.Windows.Forms.CheckBox();
             this.chkMA200 = new System.Windows.Forms.CheckBox();
+            this.chkVolume = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.chtTrends)).BeginInit();
             this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // chtTrends
             // 
-            chartArea2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            chartArea2.BorderWidth = 5;
-            chartArea2.Name = "ChartArea1";
-            this.chtTrends.ChartAreas.Add(chartArea2);
-            legend2.Name = "Legend1";
-            this.chtTrends.Legends.Add(legend2);
+            chartArea1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            chartArea1.BorderWidth = 5;
+            chartArea1.Name = "ChartArea1";
+            this.chtTrends.ChartAreas.Add(chartArea1);
+            legend1.Name = "Legend1";
+            this.chtTrends.Legends.Add(legend1);
             this.chtTrends.Location = new System.Drawing.Point(35, 109);
             this.chtTrends.Name = "chtTrends";
-            series2.BorderWidth = 5;
-            series2.ChartArea = "ChartArea1";
-            series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series2.Legend = "Legend1";
-            series2.Name = "Price";
-            this.chtTrends.Series.Add(series2);
+            series1.BorderWidth = 5;
+            series1.ChartArea = "ChartArea1";
+            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series1.Legend = "Legend1";
+            series1.Name = "Price";
+            this.chtTrends.Series.Add(series1);
             this.chtTrends.Size = new System.Drawing.Size(708, 330);
             this.chtTrends.TabIndex = 0;
             this.chtTrends.Text = "  ";
@@ -111,11 +112,22 @@ namespace Stock_YahooFinance
             this.chkMA200.UseVisualStyleBackColor = true;
             this.chkMA200.CheckedChanged += new System.EventHandler(this.chkMA200_CheckedChanged);
             // 
+            // chkVolume
+            // 
+            this.chkVolume.AutoSize = true;
+            this.chkVolume.Location = new System.Drawing.Point(425, 50);
+            this.chkVolume.Name = "chkVolume";
+            this.chkVolume.Size = new System.Drawing.Size(89, 24);
+            this.chkVolume.TabIndex = 5;
+            this.chkVolume.Text = "Volume";
+            this.chkVolume.UseVisualStyleBackColor = true;
+            // 
             // frmCharts
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(778, 486);
+            this.Controls.Add(this.chkVolume);
             this.Controls.Add(this.chkMA200);
             this.Controls.Add(this.chkMA50);
             this.Controls.Add(this.statusStrip1);
@@ -140,5 +152,6 @@ namespace Stock_YahooFinance
         private System.Windows.Forms.ToolStripStatusLabel stslblStatus;
         private System.Windows.Forms.CheckBox chkMA50;
         private System.Windows.Forms.CheckBox chkMA200;
+        private System.Windows.Forms.CheckBox chkVolume;
     }
 }
