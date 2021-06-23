@@ -27,7 +27,7 @@ namespace Stock_YahooFinance
         private void frmMain_Load(object sender, EventArgs e)
         {
             ReadTickers();
-            GetPrice();
+            //GetPrice();
         }
 
         // method that reads all tickers from text file into list view and ticker list
