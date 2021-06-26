@@ -33,5 +33,19 @@ namespace Stock_YahooFinance
 
         }
 
+        private void txtDaysRange_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            // only allow controls and numbers
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+
+            // only allow up to 3 numbers
+            if (txtDaysRange.Text.Length == 3 && !char.IsControl(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+        }
     }
 }
