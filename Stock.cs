@@ -22,6 +22,7 @@ namespace Stock_YahooFinance
         public double MA50_Change_Percent { get; set; }
         public double MA200_Change { get; set; }
         public double MA200_Change_Percent { get; set; }
+        public DateTime EarningsTimeStamp { get; set; }
         public Dictionary<int, decimal> PriceHistory  { get; set; }
         public Dictionary<DateTime, decimal> PriceHistoryDates { get; set; }
         public Dictionary<DateTime, decimal> VolumeHistory { get; set; }
@@ -231,6 +232,17 @@ namespace Stock_YahooFinance
                 this.VolumeHistory.Add(point.DateTime, point.Volume);
         }
 
+        public async Task GetEarningsDate()
+        {
+            // gets the UNIX earnings date and covert it to local time
+            var stock = await Yahoo.Symbols(ticker).Fields(Field.EarningsTimestampStart).QueryAsync();
+            var stockTic = stock[ticker];
+            double dateInSeconds = stockTic[Field.EarningsTimestampStart];
+            DateTime dt = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc);
+            dt = dt.AddSeconds(dateInSeconds).ToLocalTime();
+            this.EarningsTimeStamp = dt;           
+        }
+
         public async Task GetStockData()
         {
             // gets different data about this particular stock
@@ -239,6 +251,7 @@ namespace Stock_YahooFinance
                 Field.AverageDailyVolume3Month, Field.RegularMarketChangePercent, 
                 Field.FiftyDayAverageChange, Field.FiftyDayAverageChangePercent,
                 Field.TwoHundredDayAverageChange, Field.TwoHundredDayAverageChangePercent).QueryAsync();
+
             var stockTic = stock[ticker];
 
             this.RegularMarketPrice = stockTic[Field.RegularMarketPrice];

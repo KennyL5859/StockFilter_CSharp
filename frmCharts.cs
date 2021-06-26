@@ -233,8 +233,7 @@ namespace Stock_YahooFinance
             if (typeGraph == 2)
                 CreatePriceStatusLabels();
             else
-                CreateMAStatusLabels();
-
+                CreateMAStatusLabels();   
         }
 
         private async void CreateMAStatusLabels()

@@ -195,6 +195,16 @@ namespace Stock_YahooFinance
             MessageBox.Show("test");
         }
 
+        private void btnEarnings_Click(object sender, EventArgs e)
+        {
+            // open the earnings form
+            int selIndex = lstTickers.SelectedIndex;
+            frmEarnings eaForm = new frmEarnings(tickerList, selIndex);
+            eaForm.ShowDialog();
 
+
+
+
+        }
     }
 }
