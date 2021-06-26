@@ -31,6 +31,18 @@ namespace Stock_YahooFinance
 
             lstTickers.SelectedIndex = selIndex;
 
+            LoadListBox(tickerList[selIndex]);
+
+        }
+
+        private void LoadListBox(string ticker)
+        {
+            // clear listbox and re-load the titles 
+            lstResults.Items.Clear();
+            lstResults.Items.Add("Ticker".PadRight(10) + "Earnings".PadRight(12) + "Dividend");
+            lstResults.Items.Add("------".PadRight(10) + "--------".PadRight(12) + "--------");
+
+
         }
 
         private void txtDaysRange_KeyPress(object sender, KeyPressEventArgs e)

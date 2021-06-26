@@ -188,11 +188,10 @@ namespace Stock_YahooFinance
 
         private async void GetPrice()
         {
-            Stock sts = new Stock("SPY");
-            int first = 6;
-            int second = 6;
-            var x = await sts.GetVolumeChartLabels(first, second);
-            MessageBox.Show("test");
+            Stock sts = new Stock("BA");
+            await sts.GetDividendDate();
+            var dt = sts.DividendDate;      
+            MessageBox.Show(dt.ToString());
         }
 
         private void btnEarnings_Click(object sender, EventArgs e)
@@ -201,10 +200,6 @@ namespace Stock_YahooFinance
             int selIndex = lstTickers.SelectedIndex;
             frmEarnings eaForm = new frmEarnings(tickerList, selIndex);
             eaForm.ShowDialog();
-
-
-
-
         }
     }
 }

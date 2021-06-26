@@ -23,6 +23,7 @@ namespace Stock_YahooFinance
         public double MA200_Change { get; set; }
         public double MA200_Change_Percent { get; set; }
         public DateTime EarningsTimeStamp { get; set; }
+        public DateTime DividendDate { get; set; }
         public Dictionary<int, decimal> PriceHistory  { get; set; }
         public Dictionary<DateTime, decimal> PriceHistoryDates { get; set; }
         public Dictionary<DateTime, decimal> VolumeHistory { get; set; }
@@ -230,6 +231,27 @@ namespace Stock_YahooFinance
 
             foreach (var point in history)
                 this.VolumeHistory.Add(point.DateTime, point.Volume);
+        }
+
+        public async Task GetDividendDate()
+        {
+            // gets the UNIX dividend date and convert to local time
+            var stock = await Yahoo.Symbols(ticker).Fields(Field.DividendDate).QueryAsync();
+            var stockTic = stock[ticker];
+            double dateInSeconds;
+
+            // try to get the dividend date if there is one, or else set it to 01/01/1900
+            try
+            {
+                dateInSeconds = stockTic[Field.DividendDate];
+                DateTime dt = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc);
+                dt = dt.AddSeconds(dateInSeconds).ToLocalTime();
+                this.DividendDate = dt;
+            }
+            catch (Exception)
+            {
+                this.DividendDate = new DateTime(1900, 1, 1);  
+            }
         }
 
         public async Task GetEarningsDate()
