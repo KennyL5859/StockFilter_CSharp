@@ -22,7 +22,7 @@ namespace Stock_YahooFinance
         public double MA50_Change_Percent { get; set; }
         public double MA200_Change { get; set; }
         public double MA200_Change_Percent { get; set; }
-        public DateTime EarningsTimeStamp { get; set; }
+        public DateTime EarningsDate { get; set; }
         public DateTime DividendDate { get; set; }
         public Dictionary<int, decimal> PriceHistory  { get; set; }
         public Dictionary<DateTime, decimal> PriceHistoryDates { get; set; }
@@ -259,10 +259,21 @@ namespace Stock_YahooFinance
             // gets the UNIX earnings date and covert it to local time
             var stock = await Yahoo.Symbols(ticker).Fields(Field.EarningsTimestampStart).QueryAsync();
             var stockTic = stock[ticker];
-            double dateInSeconds = stockTic[Field.EarningsTimestampStart];
-            DateTime dt = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc);
-            dt = dt.AddSeconds(dateInSeconds).ToLocalTime();
-            this.EarningsTimeStamp = dt;           
+            double dateInSeconds;
+
+            // try to get earnings date if there is one, or else set it to 01/01/1900
+            try
+            {
+                dateInSeconds = stockTic[Field.EarningsTimestampStart];
+                DateTime dt = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc);
+                dt = dt.AddSeconds(dateInSeconds).ToLocalTime();
+                this.EarningsDate = dt;
+            }
+            catch (Exception)
+            {
+                this.EarningsDate = new DateTime(1900, 1, 1); 
+            }
+         
         }
 
         public async Task GetStockData()
