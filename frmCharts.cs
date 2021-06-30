@@ -133,12 +133,21 @@ namespace Stock_YahooFinance
             // create stock object, get all data, and get chart labels
             Stock stks = new Stock(ticker);
             var dateVolumes = await stks.GetVolumeChartLabels(fIndex, sIndex);
+            await stks.GetStockData();
+
+            // gets the 3 month average
+            double Avg3MonthVol = stks.Avg3MonthVol;
 
             // clear series and titles and re-add it
             chtVolume.Series.Clear();
             chtVolume.Titles.Clear();
             chtVolume.Series.Add("Volume");
+            chtVolume.Series.Add("3MonthVol");
             chtVolume.Series["Volume"].ChartType = SeriesChartType.Column;
+            chtVolume.Series["3MonthVol"].ChartType = SeriesChartType.Line;
+            chtVolume.Series["3MonthVol"].BorderWidth = 4;
+            chtVolume.Series["3MonthVol"].Color = Color.OrangeRed;
+       
 
             // make title, format it and set it
             Title title = new Title();
@@ -160,6 +169,7 @@ namespace Stock_YahooFinance
             foreach (var point in dateVolumes)
             {
                 chtVolume.Series["Volume"].Points.AddXY(point.Key, point.Value);
+                chtVolume.Series["3MonthVol"].Points.AddXY(point.Key, Avg3MonthVol);
 
                 if (point.Value > yMax)
                     yMax = point.Value;

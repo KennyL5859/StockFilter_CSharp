@@ -37,7 +37,7 @@ namespace Stock_YahooFinance
         public async Task<Dictionary<string, double>> GetVolumeChartLabels(int fIndex, int sIndex)
         {
             Dictionary<string, double> volumeDic = new Dictionary<string, double>();
-            await GetHistoricalVolumes(DateTime.Today.AddDays(-18), DateTime.Today.AddDays(1));
+            await GetHistoricalVolumes(DateTime.Today.AddDays(-20), DateTime.Today.AddDays(1));
             int first = this.VolumeHistory.Count - fIndex - sIndex - 1;
 
             for (int i = first; i < this.VolumeHistory.Count; i++)
@@ -55,7 +55,7 @@ namespace Stock_YahooFinance
         {
             // returns a dictionary with historical volumes ex. [5/28, 55544345]
             Dictionary<string, double> priceDic = new Dictionary<string, double>();
-            await GetHistoricalPricesDates(DateTime.Today.AddDays(-18), DateTime.Today.AddDays(1));
+            await GetHistoricalPricesDates(DateTime.Today.AddDays(-20), DateTime.Today.AddDays(1));
             int first = this.PriceHistoryDates.Count - fIndex - sIndex - 1;        
 
             for (int i = first; i < this.PriceHistoryDates.Count; i++)
@@ -73,7 +73,7 @@ namespace Stock_YahooFinance
         {   
             // calculates and returns two prices and percent as strings in list ex. [$123.33, $125.45, 1.72%]
             List<string> priceList = new List<string>();
-            await GetHistoricalPrices(DateTime.Today.AddDays(-18), DateTime.Today.AddDays(1));
+            await GetHistoricalPrices(DateTime.Today.AddDays(-20), DateTime.Today.AddDays(1));
             int first = this.PriceHistory.Count - fIndex - sIndex - 1;
             int second = this.PriceHistory.Count - sIndex - 1;
             decimal price1 = this.PriceHistory.ElementAt(first).Value;
@@ -92,7 +92,7 @@ namespace Stock_YahooFinance
         {
             // calculates and returns two dates as strings in a list ex. [5/28, 5/30]
             List<string> dateList = new List<string>();        
-            await GetHistoricalPricesDates(DateTime.Today.AddDays(-18), DateTime.Today.AddDays(1));
+            await GetHistoricalPricesDates(DateTime.Today.AddDays(-20), DateTime.Today.AddDays(1));
             int first = this.PriceHistoryDates.Count - fIndex - sIndex - 1;
             int second = this.PriceHistoryDates.Count - sIndex - 1;
             DateTime firstDate = this.PriceHistoryDates.ElementAt(first).Key;
@@ -194,7 +194,6 @@ namespace Stock_YahooFinance
 
                 return true;                
             }
-
 
             return false;
         }

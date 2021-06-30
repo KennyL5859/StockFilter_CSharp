@@ -37,6 +37,7 @@ namespace Stock_YahooFinance
             // clear results and ticker's selected index
             lstResults.Items.Clear();
             lstTickers.SelectedIndex = -1;
+            ChangeStatusLabel();
         }
 
         private async void tosbtnFilter_Click(object sender, EventArgs e)
@@ -70,6 +71,8 @@ namespace Stock_YahooFinance
                     selList.Add(stks.ticker);
                 }
             }
+
+            ChangeStatusLabel();
         }
 
         private void lstTickers_SelectedIndexChanged(object sender, EventArgs e)
@@ -126,6 +129,8 @@ namespace Stock_YahooFinance
             string earningsDate = eaDate.Year == 1900 ? "N/A" : eaDate.ToString("MM/dd/yy");
             string dividendDate = divDate.Year == 1900 ? "N/A" : divDate.ToString("MM/dd/yy");
             lstResults.Items.Add(ticker.PadRight(10) + earningsDate.PadRight(12) + dividendDate);
+
+            ChangeStatusLabel();
         }
 
         private void txtDaysRange_KeyPress(object sender, KeyPressEventArgs e)
@@ -140,6 +145,29 @@ namespace Stock_YahooFinance
             if (txtDaysRange.Text.Length == 3 && !char.IsControl(e.KeyChar))
             {
                 e.Handled = true;
+            }
+        }
+
+        private async void ChangeStatusLabel()
+        {
+            // create a status label based on event
+            if (lstResults.Items.Count == 3)
+            {
+                string ticker = tickerList[lstTickers.SelectedIndex];
+                Stock stks = new Stock(ticker);
+                await stks.GetStockData();
+                double price = Math.Round(stks.RegularMarketPrice, 2);
+                string sPrice = "$" + price.ToString();
+                stslblStatus.Text = ticker + " - " + sPrice;
+            }
+            else if (lstResults.Items.Count == 0)
+            {
+                stslblStatus.Text = "";
+            }
+            else 
+            {
+                int matches = lstResults.Items.Count - 2;
+                stslblStatus.Text = matches.ToString() + " records matched your criteria";
             }
         }
     }
