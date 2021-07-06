@@ -98,6 +98,12 @@
     <Compile Include="frmTrend.Designer.cs">
       <DependentUpon>frmTrend.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmVolume.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmVolume.Designer.cs">
+      <DependentUpon>frmVolume.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Stock.cs" />
@@ -118,6 +124,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmTrend.resx">
       <DependentUpon>frmTrend.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmVolume.resx">
+      <DependentUpon>frmVolume.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

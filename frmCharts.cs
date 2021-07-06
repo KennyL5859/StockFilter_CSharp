@@ -144,10 +144,12 @@ namespace Stock_YahooFinance
             chtVolume.Series.Add("Volume");
             chtVolume.Series.Add("3MonthVol");
             chtVolume.Series["Volume"].ChartType = SeriesChartType.Column;
+            chtVolume.Series["Volume"].LegendToolTip = "Daily Volume";
             chtVolume.Series["3MonthVol"].ChartType = SeriesChartType.Line;
             chtVolume.Series["3MonthVol"].BorderWidth = 4;
             chtVolume.Series["3MonthVol"].Color = Color.OrangeRed;
-       
+            chtVolume.Series["3MonthVol"].LegendText = "3M Avg";
+            chtVolume.Series["3MonthVol"].LegendToolTip = "3 Month Average Volume";
 
             // make title, format it and set it
             Title title = new Title();

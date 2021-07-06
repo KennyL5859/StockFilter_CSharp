@@ -43,6 +43,7 @@ namespace Stock_YahooFinance
             this.btn50Day = new System.Windows.Forms.Button();
             this.btnTrend = new System.Windows.Forms.Button();
             this.btnEarnings = new System.Windows.Forms.Button();
+            this.btnVolume = new System.Windows.Forms.Button();
             this.statusStp.SuspendLayout();
             this.tolStp.SuspendLayout();
             this.SuspendLayout();
@@ -157,7 +158,7 @@ namespace Stock_YahooFinance
             // 
             this.btnTrend.BackColor = System.Drawing.Color.DarkCyan;
             this.btnTrend.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnTrend.Location = new System.Drawing.Point(170, 127);
+            this.btnTrend.Location = new System.Drawing.Point(170, 125);
             this.btnTrend.Name = "btnTrend";
             this.btnTrend.Size = new System.Drawing.Size(149, 42);
             this.btnTrend.TabIndex = 4;
@@ -169,7 +170,7 @@ namespace Stock_YahooFinance
             // 
             this.btnEarnings.BackColor = System.Drawing.Color.DarkCyan;
             this.btnEarnings.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnEarnings.Location = new System.Drawing.Point(170, 201);
+            this.btnEarnings.Location = new System.Drawing.Point(170, 197);
             this.btnEarnings.Name = "btnEarnings";
             this.btnEarnings.Size = new System.Drawing.Size(149, 42);
             this.btnEarnings.TabIndex = 5;
@@ -177,11 +178,24 @@ namespace Stock_YahooFinance
             this.btnEarnings.UseVisualStyleBackColor = false;
             this.btnEarnings.Click += new System.EventHandler(this.btnEarnings_Click);
             // 
+            // btnVolume
+            // 
+            this.btnVolume.BackColor = System.Drawing.Color.DarkCyan;
+            this.btnVolume.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnVolume.Location = new System.Drawing.Point(170, 269);
+            this.btnVolume.Name = "btnVolume";
+            this.btnVolume.Size = new System.Drawing.Size(149, 42);
+            this.btnVolume.TabIndex = 6;
+            this.btnVolume.Text = "Volume";
+            this.btnVolume.UseVisualStyleBackColor = false;
+            this.btnVolume.Click += new System.EventHandler(this.btnVolume_Click);
+            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(521, 508);
+            this.Controls.Add(this.btnVolume);
             this.Controls.Add(this.btnEarnings);
             this.Controls.Add(this.btnTrend);
             this.Controls.Add(this.btn50Day);
@@ -215,6 +229,7 @@ namespace Stock_YahooFinance
         private System.Windows.Forms.Button btnTrend;
         private System.Windows.Forms.ToolStripButton tosbtnChart;
         private System.Windows.Forms.Button btnEarnings;
+        private System.Windows.Forms.Button btnVolume;
     }
 }
 

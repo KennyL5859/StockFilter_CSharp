@@ -148,6 +148,20 @@ namespace Stock_YahooFinance
             trendForm.ShowDialog();
         }
 
+        private void btnEarnings_Click(object sender, EventArgs e)
+        {
+            // open the earnings form
+            int selIndex = lstTickers.SelectedIndex;
+            frmEarnings eaForm = new frmEarnings(tickerList, selIndex);
+            eaForm.ShowDialog();
+        }
+
+        private void btnVolume_Click(object sender, EventArgs e)
+        {
+            frmVolume volForm = new frmVolume(tickerList);
+            volForm.ShowDialog();
+        }
+
 
         private void UpdateTickerListBox()
         {
@@ -192,14 +206,6 @@ namespace Stock_YahooFinance
             await sts.GetDividendDate();
             var dt = sts.DividendDate;      
             MessageBox.Show(dt.ToString());
-        }
-
-        private void btnEarnings_Click(object sender, EventArgs e)
-        {
-            // open the earnings form
-            int selIndex = lstTickers.SelectedIndex;
-            frmEarnings eaForm = new frmEarnings(tickerList, selIndex);
-            eaForm.ShowDialog();
         }
     }
 }
