@@ -22,9 +22,15 @@ namespace Stock_YahooFinance
 
         private void tosbtnScan_Click(object sender, EventArgs e)
         {
-            // if it doesn't pass 
+            // if it doesn't pass the check, return
             if (!CheckMaskedText(mstDaysRange, mstVolRange))
                 return;
+
+            // get total days and number of volume days as ints
+            int totalDays = mstDaysRange.Text == "" ? 0 : Convert.ToInt32(mstDaysRange.Text);
+            int volDays = mstVolRange.Text == "" ? 0 : Convert.ToInt32(mstVolRange.Text);
+
+
         }
 
         private bool CheckMaskedText(MaskedTextBox m1, MaskedTextBox m2)
@@ -57,7 +63,12 @@ namespace Stock_YahooFinance
             {
                 MessageBox.Show("Number of volume days must be less than total days");
                 return false;
-            }  
+            }
+            else if (volDays > 365 || totalDays > 365)
+            {
+                MessageBox.Show("Total number of days and number of volume days must be less than 365");
+                return false;
+            }
 
             return true;
         }

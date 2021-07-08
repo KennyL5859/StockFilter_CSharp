@@ -34,6 +34,16 @@ namespace Stock_YahooFinance
             this.ticker = ticSymbol;
         }
 
+
+        public async Task<List<string>> CheckVolumeTrend(int totalDays, int volDays)
+        {
+            List<string> volData = new List<string>();
+            await GetStockData();     
+
+
+            return volData;
+        }
+
         public async Task<Dictionary<string, double>> GetVolumeChartLabels(int fIndex, int sIndex)
         {
             Dictionary<string, double> volumeDic = new Dictionary<string, double>();
@@ -85,6 +95,7 @@ namespace Stock_YahooFinance
             priceList.Add(strPrice1);
             priceList.Add(strPrice2);
             priceList.Add(finalPercent);
+            priceList.Add(rawPercent.ToString());
             return priceList;
         }
 

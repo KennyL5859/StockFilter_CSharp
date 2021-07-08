@@ -42,6 +42,9 @@ namespace Stock_YahooFinance
             lstResults.Items.Clear();
             qualifyTicList.Clear();
 
+            // this is a list to sort the qualified tickers based on descending order
+            List<List<string>> quaList = new List<List<string>>();
+
             // prompt user if no up or down number of days is selected
             if (ddlDown.SelectedIndex == -1 && ddlUp.SelectedIndex == -1)
             {
@@ -91,11 +94,14 @@ namespace Stock_YahooFinance
                 if (qualify)
                 {
                     qualifyTicList.Add(ticker);
-                    var priceList = await stks.GetPriceLabels(firstIndex, secondIndex);
-                    lstResults.Items.Add(stks.ticker.PadRight(11) + priceList[0].PadRight(11) +
-                        priceList[1].PadRight(11) + priceList[2]);
+                    List<string> priceList = await stks.GetPriceLabels(firstIndex, secondIndex);
+                    quaList.Add(priceList);
+                    //lstResults.Items.Add(stks.ticker.PadRight(11) + priceList[0].PadRight(11) +
+                    //    priceList[1].PadRight(11) + priceList[2]);
                 }
             }
+
+            var test = quaList.OrderByDescending(x => Math.Abs(Convert.ToDecimal(x[3]))).ToList();
 
             // display number of matches on status label
             int numMatches = lstResults.Items.Count - 2;
