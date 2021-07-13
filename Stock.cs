@@ -92,6 +92,7 @@ namespace Stock_YahooFinance
             string finalPercent = rawPercent.ToString("P", CultureInfo.InvariantCulture);
             string strPrice1 = "$" + Math.Round(price1, 2).ToString();
             string strPrice2 = "$" + Math.Round(price2, 2).ToString();
+            priceList.Add(this.ticker);
             priceList.Add(strPrice1);
             priceList.Add(strPrice2);
             priceList.Add(finalPercent);

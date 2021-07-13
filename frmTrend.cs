@@ -101,7 +101,11 @@ namespace Stock_YahooFinance
                 }
             }
 
-            var test = quaList.OrderByDescending(x => Math.Abs(Convert.ToDecimal(x[3]))).ToList();
+            // sort the list by percentages descending and add it to the listbox
+            var sortedQuaList = quaList.OrderByDescending(x => Math.Abs(Convert.ToDecimal(x[4]))).ToList();
+
+            foreach (List<string> list in sortedQuaList)            
+                lstResults.Items.Add(list[0].PadRight(11) + list[1].PadRight(11) + list[2].PadRight(11) + list[3]);
 
             // display number of matches on status label
             int numMatches = lstResults.Items.Count - 2;
