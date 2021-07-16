@@ -89,17 +89,21 @@ namespace Stock_YahooFinance
 
         private void lstResults_DoubleClick(object sender, EventArgs e)
         {
-            tosbtnChart_Click(sender, e);
+            if (lstResults.SelectedIndex >= 2)
+                tosbtnChart_Click(sender, e);
         }
 
         private async Task FillListBox(double percentRange)
         {
+            List<List<string>> qualifiedList = new List<List<string>>();
+
             // fill in the listbox based on moving average percentages criteria
             lstResults.Items.Clear();
             lstResults.Items.Add("Ticker".PadRight(10) + "% Change");
             lstResults.Items.Add("------".PadRight(10) + "--------");
 
             // loop through tickerlist and determine whether stock fits percentage criteria
+            // if it fits, then add it to the templist which is added to qualifed list
             for (int i = 0; i < tickerList.Count; i++)
             {
                 string ticker = tickerList[i];
@@ -109,48 +113,51 @@ namespace Stock_YahooFinance
                 double MA50Percent = stks.MA50_Change_Percent;
                 double MA200Percent = stks.MA200_Change_Percent;
 
+                List<string> tempList = new List<string>();
+                
+
                 if (rad50MA.Checked)
                 {
                     if (percentRange == 0.01)
                     {
                         if (Math.Abs(MA50Percent) <= 0.015)
-                        {
-                            lstResults.Items.Add(stks.ticker.PadRight(10) +
-                                Math.Round(stks.MA50_Change_Percent * 100, 2).ToString() + "%");
+                        { 
+                            tempList.Add(stks.ticker);
+                            tempList.Add(MA50Percent.ToString());
                         }
                     }
                     else if (percentRange == 0.02)
                     {
                         if (Math.Abs(MA50Percent) > 0.015 && Math.Abs(MA50Percent) <= 0.025)
-                        {
-                            lstResults.Items.Add(stks.ticker.PadRight(10) +
-                                Math.Round(stks.MA50_Change_Percent * 100, 2).ToString() + "%");
+                        {                
+                            tempList.Add(stks.ticker);
+                            tempList.Add(MA50Percent.ToString());
                         }
                     }
                     else if (percentRange == 0.03)
                     {
                         if (Math.Abs(MA50Percent) > 0.025 && Math.Abs(MA50Percent) <= 0.035)
-                        {
-                            lstResults.Items.Add(stks.ticker.PadRight(10) +
-                                Math.Round(stks.MA50_Change_Percent * 100, 2).ToString() + "%");
+                        {          
+                            tempList.Add(stks.ticker);
+                            tempList.Add(MA50Percent.ToString());
                         }
                     }
                     else if (percentRange == 0.04)
                     {
                         if (Math.Abs(MA50Percent) > 0.035 && Math.Abs(MA50Percent) <= 0.045)
-                        {
-                            lstResults.Items.Add(stks.ticker.PadRight(10) +
-                                Math.Round(stks.MA50_Change_Percent * 100, 2).ToString() + "%");
+                        {           
+                            tempList.Add(stks.ticker);
+                            tempList.Add(MA50Percent.ToString());
                         }
                     }
                     else if (percentRange == 0.05)
                     {
                         if (Math.Abs(MA50Percent) > 0.045 && Math.Abs(MA50Percent) <= 0.055)
-                        {
-                            lstResults.Items.Add(stks.ticker.PadRight(10) +
-                                Math.Round(stks.MA50_Change_Percent * 100, 2).ToString() + "%");
+                        {               
+                            tempList.Add(stks.ticker);
+                            tempList.Add(MA50Percent.ToString());
                         }
-                    }
+                    }                   
                 }
                 else if (rad200MA.Checked)
                 {
@@ -158,43 +165,57 @@ namespace Stock_YahooFinance
                     {
                         if (Math.Abs(MA200Percent) <= 0.015)
                         {
-                            lstResults.Items.Add(stks.ticker.PadRight(10) +
-                                Math.Round(stks.MA200_Change_Percent * 100, 2).ToString() + "%");
+                            tempList.Add(stks.ticker);
+                            tempList.Add(MA200Percent.ToString());
                         }
                     }
                     else if (percentRange == 0.02)
                     {
                         if (Math.Abs(MA200Percent) > 0.015 && Math.Abs(MA200Percent) <= 0.025)
                         {
-                            lstResults.Items.Add(stks.ticker.PadRight(10) +
-                                Math.Round(stks.MA200_Change_Percent * 100, 2).ToString() + "%");
+                            tempList.Add(stks.ticker);
+                            tempList.Add(MA200Percent.ToString());
                         }
                     }
                     else if (percentRange == 0.03)
                     {
                         if (Math.Abs(MA200Percent) > 0.025 && Math.Abs(MA200Percent) <= 0.035)
                         {
-                            lstResults.Items.Add(stks.ticker.PadRight(10) +
-                                Math.Round(stks.MA200_Change_Percent * 100, 2).ToString() + "%");
+                            tempList.Add(stks.ticker);
+                            tempList.Add(MA200Percent.ToString());
                         }
                     }
                     else if (percentRange == 0.04)
                     {
                         if (Math.Abs(MA200Percent) > 0.035 && Math.Abs(MA200Percent) <= 0.045)
                         {
-                            lstResults.Items.Add(stks.ticker.PadRight(10) +
-                                Math.Round(stks.MA200_Change_Percent * 100, 2).ToString() + "%");
+                            tempList.Add(stks.ticker);
+                            tempList.Add(MA200Percent.ToString());
                         }
                     }
                     else if (percentRange == 0.05)
                     {
                         if (Math.Abs(MA200Percent) > 0.045 && Math.Abs(MA200Percent) <= 0.055)
                         {
-                            lstResults.Items.Add(stks.ticker.PadRight(10) +
-                                Math.Round(stks.MA200_Change_Percent * 100, 2).ToString() + "%");
+                            tempList.Add(stks.ticker);
+                            tempList.Add(MA200Percent.ToString());
                         }
-                    }
+                    }                    
                 }
+
+                // if templist is not empty, then add it to the qualified list
+                if (tempList.Count > 0)
+                    qualifiedList.Add(tempList);
+            }
+
+            // sort the list in ascending order
+            var sortedList = qualifiedList.OrderBy(x => Convert.ToDouble(x[1])).ToList();
+
+            // display the results in the listbox results view
+            foreach (var list in sortedList)
+            {
+                lstResults.Items.Add(list[0].PadRight(10) +
+                    Math.Round(Convert.ToDouble(list[1]) * 100, 2).ToString() + "%");
             }
         }
 

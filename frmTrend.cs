@@ -29,7 +29,7 @@ namespace Stock_YahooFinance
         private void frmTrend_Load(object sender, EventArgs e)
         {
             // populate the drop down lists
-            for (int i = 0; i <= 5; i++)
+            for (int i = 0; i <= 6; i++)
             {
                 ddlDown.Items.Add(i);
                 ddlUp.Items.Add(i);

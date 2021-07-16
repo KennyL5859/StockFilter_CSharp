@@ -49,6 +49,8 @@ namespace Stock_YahooFinance
             // 
             // lstResults
             // 
+            this.lstResults.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.lstResults.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lstResults.FormattingEnabled = true;
             this.lstResults.ItemHeight = 28;
@@ -67,7 +69,7 @@ namespace Stock_YahooFinance
             this.tosbtnChart});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(828, 33);
+            this.toolStrip1.Size = new System.Drawing.Size(828, 38);
             this.toolStrip1.TabIndex = 1;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -77,7 +79,7 @@ namespace Stock_YahooFinance
             this.tosbtnSearch.Image = ((System.Drawing.Image)(resources.GetObject("tosbtnSearch.Image")));
             this.tosbtnSearch.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tosbtnSearch.Name = "tosbtnSearch";
-            this.tosbtnSearch.Size = new System.Drawing.Size(34, 28);
+            this.tosbtnSearch.Size = new System.Drawing.Size(34, 33);
             this.tosbtnSearch.Text = "Search";
             this.tosbtnSearch.Click += new System.EventHandler(this.tosbtnSearch_Click);
             // 
@@ -87,7 +89,7 @@ namespace Stock_YahooFinance
             this.tosbtnClear.Image = ((System.Drawing.Image)(resources.GetObject("tosbtnClear.Image")));
             this.tosbtnClear.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tosbtnClear.Name = "tosbtnClear";
-            this.tosbtnClear.Size = new System.Drawing.Size(34, 28);
+            this.tosbtnClear.Size = new System.Drawing.Size(34, 33);
             this.tosbtnClear.Text = "Clear";
             this.tosbtnClear.Click += new System.EventHandler(this.tosbtnClear_Click);
             // 
@@ -97,7 +99,7 @@ namespace Stock_YahooFinance
             this.tosbtnChart.Image = ((System.Drawing.Image)(resources.GetObject("tosbtnChart.Image")));
             this.tosbtnChart.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tosbtnChart.Name = "tosbtnChart";
-            this.tosbtnChart.Size = new System.Drawing.Size(34, 28);
+            this.tosbtnChart.Size = new System.Drawing.Size(34, 33);
             this.tosbtnChart.Text = "Chart";
             this.tosbtnChart.Click += new System.EventHandler(this.tosbtnChart_Click);
             // 
