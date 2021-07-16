@@ -20,7 +20,7 @@ namespace Stock_YahooFinance
             this.tickerList = tList;
         }
 
-        private void tosbtnScan_Click(object sender, EventArgs e)
+        private async void tosbtnScan_Click(object sender, EventArgs e)
         {
             // if it doesn't pass the check, return
             if (!CheckMaskedText(mstDaysRange, mstVolRange))
@@ -30,7 +30,8 @@ namespace Stock_YahooFinance
             int totalDays = mstDaysRange.Text == "" ? 0 : Convert.ToInt32(mstDaysRange.Text);
             int volDays = mstVolRange.Text == "" ? 0 : Convert.ToInt32(mstVolRange.Text);
 
-
+            Stock stks = new Stock("BA");
+            await stks.CheckVolumeTrend(totalDays, volDays);
         }
 
         private bool CheckMaskedText(MaskedTextBox m1, MaskedTextBox m2)
@@ -64,9 +65,9 @@ namespace Stock_YahooFinance
                 MessageBox.Show("Number of volume days must be less than total days");
                 return false;
             }
-            else if (volDays > 365 || totalDays > 365)
+            else if (volDays > 90 || totalDays > 90)
             {
-                MessageBox.Show("Total number of days and number of volume days must be less than 365");
+                MessageBox.Show("Total number of days and number of volume days must be less than 90");
                 return false;
             }
 

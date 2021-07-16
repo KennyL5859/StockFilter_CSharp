@@ -42,15 +42,22 @@ namespace Stock_YahooFinance
 
         private async void tosbtnFilter_Click(object sender, EventArgs e)
         {
+            List<List<string>> qualifedDateList = new List<List<string>>();
             selList.Clear();
+
+            // gets the date range from textbox and limit it to 30 days
+            int daysRange = txtDaysRange.Text.Length == 0 ? 0 : Convert.ToInt32(txtDaysRange.Text);
+
+            if (daysRange > 30)
+            {
+                MessageBox.Show("Earnings days range cannot exceed 30 days");
+                return;
+            }
 
             // clear results listbox and setup labels
             lstResults.Items.Clear();
             lstResults.Items.Add("Ticker".PadRight(10) + "Earnings".PadRight(12) + "Dividend");
-            lstResults.Items.Add("------".PadRight(10) + "--------".PadRight(12) + "--------");
-
-            // gets the date range from textbox
-            int daysRange = txtDaysRange.Text.Length == 0 ? 0 : Convert.ToInt32(txtDaysRange.Text);
+            lstResults.Items.Add("------".PadRight(10) + "--------".PadRight(12) + "--------");        
 
             // loop thru tickerlist and see which earnings date matches future date chosen
             for (int i = 0; i < tickerList.Count; i++)
@@ -60,16 +67,28 @@ namespace Stock_YahooFinance
                 await stks.GetDividendDate();
 
                 // get the earnings and dividend dates if there is one
-                string matchDate = DateTime.Today.AddDays(daysRange).ToString("MM/dd/yy");
+                DateTime matchDate = DateTime.Today.AddDays(daysRange);
                 string eaDate = stks.EarningsDate.Year == 1900 ? "N/A" : stks.EarningsDate.ToString("MM/dd/yy");
                 string divDate = stks.DividendDate.Year == 1900 ? "N/A" : stks.DividendDate.ToString("MM/dd/yy");
 
-                // if earnings dates matches the date range criteria, add it to results and selList
-                if (stks.EarningsDate.ToString("MM/dd/yy") == matchDate)
+                if (stks.EarningsDate >= DateTime.Today && stks.EarningsDate <= matchDate)
                 {
-                    lstResults.Items.Add(stks.ticker.PadRight(10) + eaDate.PadRight(12) + divDate);
-                    selList.Add(stks.ticker);
+                    List<string> tempList = new List<string>();
+                    tempList.Add(stks.ticker);
+                    tempList.Add(eaDate);
+                    tempList.Add(divDate);
+                    qualifedDateList.Add(tempList);
                 }
+            }
+
+            // sort based on earliest to latest earnings times
+            var sortedEAList = qualifedDateList.OrderBy(x => Convert.ToDateTime(x[1])).ToList();
+
+            // add each result to the results listbox
+            foreach (var list in sortedEAList)
+            {
+                lstResults.Items.Add(list[0].PadRight(10) + list[1].PadRight(12) + list[2]);
+                selList.Add(list[0]);
             }
 
             ChangeStatusLabel();

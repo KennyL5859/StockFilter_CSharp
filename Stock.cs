@@ -38,7 +38,10 @@ namespace Stock_YahooFinance
         public async Task<List<string>> CheckVolumeTrend(int totalDays, int volDays)
         {
             List<string> volData = new List<string>();
-            await GetStockData();     
+            await GetStockData();
+            await GetHistoricalVolumes(DateTime.Today.AddDays(-150), DateTime.Today.AddDays(1));
+
+            var x = this.VolumeHistory;             
 
 
             return volData;
@@ -310,6 +313,5 @@ namespace Stock_YahooFinance
             this.MA200_Change = stockTic[Field.TwoHundredDayAverageChange];
             this.MA200_Change_Percent = stockTic[Field.TwoHundredDayAverageChangePercent];
         }
-
     }
 }

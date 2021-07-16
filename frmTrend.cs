@@ -92,20 +92,21 @@ namespace Stock_YahooFinance
 
                 // if conform, then add its ticker and prices to listbox
                 if (qualify)
-                {
-                    qualifyTicList.Add(ticker);
+                {          
                     List<string> priceList = await stks.GetPriceLabels(firstIndex, secondIndex);
-                    quaList.Add(priceList);
-                    //lstResults.Items.Add(stks.ticker.PadRight(11) + priceList[0].PadRight(11) +
-                    //    priceList[1].PadRight(11) + priceList[2]);
+                    quaList.Add(priceList);                   
                 }
             }
 
             // sort the list by percentages descending and add it to the listbox
             var sortedQuaList = quaList.OrderByDescending(x => Math.Abs(Convert.ToDecimal(x[4]))).ToList();
 
-            foreach (List<string> list in sortedQuaList)            
-                lstResults.Items.Add(list[0].PadRight(11) + list[1].PadRight(11) + list[2].PadRight(11) + list[3]);
+            foreach (List<string> list in sortedQuaList)
+            {
+                lstResults.Items.Add(list[0].PadRight(11) + list[1].PadRight(11) + list[2].PadRight(11) + 
+                    list[3]);
+                qualifyTicList.Add(list[0]);
+            }                
 
             // display number of matches on status label
             int numMatches = lstResults.Items.Count - 2;
