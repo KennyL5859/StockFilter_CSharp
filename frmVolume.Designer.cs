@@ -54,7 +54,7 @@ namespace Stock_YahooFinance
             this.tosbtnChart});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(761, 33);
+            this.toolStrip1.Size = new System.Drawing.Size(590, 33);
             this.toolStrip1.TabIndex = 0;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -76,6 +76,7 @@ namespace Stock_YahooFinance
             this.tosbtnClear.Name = "tosbtnClear";
             this.tosbtnClear.Size = new System.Drawing.Size(34, 28);
             this.tosbtnClear.Text = "Clear";
+            this.tosbtnClear.Click += new System.EventHandler(this.tosbtnClear_Click);
             // 
             // tosbtnChart
             // 
@@ -93,7 +94,7 @@ namespace Stock_YahooFinance
             this.stslblStatus});
             this.statusStrip1.Location = new System.Drawing.Point(0, 425);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(761, 22);
+            this.statusStrip1.Size = new System.Drawing.Size(590, 22);
             this.statusStrip1.TabIndex = 1;
             this.statusStrip1.Text = "statusStrip1";
             // 
@@ -109,7 +110,7 @@ namespace Stock_YahooFinance
             this.lstResults.ItemHeight = 28;
             this.lstResults.Location = new System.Drawing.Point(24, 121);
             this.lstResults.Name = "lstResults";
-            this.lstResults.Size = new System.Drawing.Size(713, 284);
+            this.lstResults.Size = new System.Drawing.Size(543, 284);
             this.lstResults.TabIndex = 2;
             // 
             // lblSearchRange
@@ -135,7 +136,7 @@ namespace Stock_YahooFinance
             // mstVolRange
             // 
             this.mstVolRange.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.mstVolRange.Location = new System.Drawing.Point(506, 61);
+            this.mstVolRange.Location = new System.Drawing.Point(513, 61);
             this.mstVolRange.Mask = "000";
             this.mstVolRange.Name = "mstVolRange";
             this.mstVolRange.Size = new System.Drawing.Size(54, 30);
@@ -146,7 +147,7 @@ namespace Stock_YahooFinance
             // 
             this.lblDaysRange.AutoSize = true;
             this.lblDaysRange.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblDaysRange.Location = new System.Drawing.Point(252, 64);
+            this.lblDaysRange.Location = new System.Drawing.Point(260, 64);
             this.lblDaysRange.Name = "lblDaysRange";
             this.lblDaysRange.Size = new System.Drawing.Size(235, 25);
             this.lblDaysRange.TabIndex = 5;
@@ -156,7 +157,7 @@ namespace Stock_YahooFinance
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(761, 447);
+            this.ClientSize = new System.Drawing.Size(590, 447);
             this.Controls.Add(this.mstVolRange);
             this.Controls.Add(this.lblDaysRange);
             this.Controls.Add(this.mstDaysRange);

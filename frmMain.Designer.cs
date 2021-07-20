@@ -57,6 +57,7 @@ namespace Stock_YahooFinance
             this.lstTickers.Name = "lstTickers";
             this.lstTickers.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
             this.lstTickers.Size = new System.Drawing.Size(119, 404);
+            this.lstTickers.Sorted = true;
             this.lstTickers.TabIndex = 0;
             this.lstTickers.DoubleClick += new System.EventHandler(this.lstTickers_DoubleClick);
             // 

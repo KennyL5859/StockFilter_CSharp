@@ -39,10 +39,50 @@ namespace Stock_YahooFinance
         {
             List<string> volData = new List<string>();
             await GetStockData();
-            await GetHistoricalVolumes(DateTime.Today.AddDays(-150), DateTime.Today.AddDays(1));
+            await GetHistoricalVolumes(DateTime.Today.AddDays(-100), DateTime.Today.AddDays(1));
 
-            var x = this.VolumeHistory;             
+            // get the starting index, average 3 month volume, and match count
+            int startIndex = this.VolumeHistory.Count - totalDays;
+            int numMatches = 0;
+            double avg3MonVol = this.Avg3MonthVol;        
+            
+            if (VolumeHistory.Count > totalDays)
+            {
+                // loop through volume and see how many days above 3 month average
+                for (int i = startIndex; i < this.VolumeHistory.Count; i++)
+                {
+                    double vol = Convert.ToDouble(VolumeHistory.ElementAt(i).Value);
 
+                    // compare volume and add it to counter
+                    if (vol >= avg3MonVol)
+                        numMatches++;
+                }
+
+                // determine if number of matches passes or fails
+                string passFail = numMatches >= volDays ? "P" : "F";
+
+                // get the start and end dates in string format 
+                DateTime start = VolumeHistory.ElementAt(startIndex).Key;
+                DateTime end = VolumeHistory.ElementAt(VolumeHistory.Count - 1).Key;
+                string dateRange = start.Month + "/" + start.Day + " - " + end.Month + "/" + end.Day;
+                string percent = ((double)numMatches / totalDays).ToString();
+                string matchResult = numMatches.ToString() + " / " + totalDays.ToString() + " days";
+
+                // add everything needed to volData list
+                volData.Add(passFail);
+                volData.Add(ticker);
+                volData.Add(dateRange);
+                volData.Add(percent);
+                volData.Add(matchResult);
+            }
+            else
+            {
+                volData.Add("F");
+                volData.Add("N/A");
+                volData.Add("N/A");
+                volData.Add("N/A");
+                volData.Add("N/A");
+            }           
 
             return volData;
         }
