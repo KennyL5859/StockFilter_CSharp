@@ -152,7 +152,7 @@ namespace Stock_YahooFinance
             // get first and second label based on which one is bigger
             int firstIndex = upIndex > downIndex ? upIndex : downIndex;
             int secondIndex = upIndex > downIndex ? downIndex : upIndex;
-            int selTickerIndex = lstResults.SelectedIndex == -1 ? -1 : lstResults.SelectedIndex - 2;
+            int selTickerIndex = lstResults.SelectedIndex < 2 ? 0 :  lstResults.SelectedIndex - 2;
 
             frmCharts chartForm = new frmCharts(qualifyTicList, firstIndex, secondIndex, selTickerIndex, 2);
             chartForm.ShowDialog();          

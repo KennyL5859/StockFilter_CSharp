@@ -74,9 +74,29 @@ namespace Stock_YahooFinance
             lstResults.Items.Clear();
         }
 
+        private void tosbtnChart_Click(object sender, EventArgs e)
+        {
+            if (selList.Count == 0)
+            {
+                MessageBox.Show("You must have qualified stocks in order to graph");
+                return;
+            }
+
+            // create a chart form and pass in the values
+            int selectedIndex = lstResults.SelectedIndex < 2 ? 0 : lstResults.SelectedIndex - 2;
+            frmCharts newChart = new frmCharts(selList, 6, 6, selectedIndex, 2);
+            newChart.ShowDialog();
+        }
+
+        private void lstResults_DoubleClick(object sender, EventArgs e)
+        {
+            if (lstResults.SelectedIndex > 1)
+                tosbtnChart_Click(sender, e);
+        }
+
         private void ChangeStatusLabel(ToolStripLabel status, string msg)
         {
-            // displays the message, then erase it after 5 seconds
+            // displays the message, then erase it after 8 seconds
             status.Text = msg;
 
             var timer = new Timer();
@@ -128,6 +148,7 @@ namespace Stock_YahooFinance
 
             return true;
         }
+
 
     }
 }

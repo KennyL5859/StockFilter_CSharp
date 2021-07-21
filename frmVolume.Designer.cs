@@ -86,6 +86,7 @@ namespace Stock_YahooFinance
             this.tosbtnChart.Name = "tosbtnChart";
             this.tosbtnChart.Size = new System.Drawing.Size(34, 28);
             this.tosbtnChart.Text = "Chart";
+            this.tosbtnChart.Click += new System.EventHandler(this.tosbtnChart_Click);
             // 
             // statusStrip1
             // 
@@ -112,6 +113,7 @@ namespace Stock_YahooFinance
             this.lstResults.Name = "lstResults";
             this.lstResults.Size = new System.Drawing.Size(543, 284);
             this.lstResults.TabIndex = 2;
+            this.lstResults.DoubleClick += new System.EventHandler(this.lstResults_DoubleClick);
             // 
             // lblSearchRange
             // 
